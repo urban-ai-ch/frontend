@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "vite build",
     "deploy": "npm run build && npx wrangler pages deploy dist",
+    "start": "vite preview",
     "format": "prettier .  --write",
     "tsc": "tsc"
   },

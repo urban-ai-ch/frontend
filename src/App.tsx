@@ -10,6 +10,7 @@ import Login from "./components/login";
 import Register from "./components/register";
 import Contact from "./components/contact";
 import Tool from "./components/tool";
+import Input from "./components/Input";
 import Code from "./components/code";
 import About from "./components/about";
 import HomePage from "./components/HomePage";
@@ -26,6 +27,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/code" element={<Code />} />
           <Route path="/about" element={<About />} />
+          <Route path="/Input" element={<Input />} />
           {isAuthenticated ? (
             <Route path="/tool" element={<ToolPage />} />
           ) : (

@@ -1,0 +1,13 @@
+.homepage-container {
+  display: flex;
+  flex-direction: column; /* Stack all components vertically */
+  /* align-items: center; */ /* Center-align all components */
+  /* gap: 3rem; */ /* Add spacing between sections */
+  /* padding: 2rem; */ /* Add padding around the page */
+}
+
+.explore-button-at-the-bottom {
+  display: flex;
+  justify-content: center;
+}
+  

@@ -1,0 +1,9 @@
+.tool-container {
+    width: 100%;
+}
+
+.filter-menu {
+    display: flex;
+    flex-wrap: nowrap; 
+    gap: 10px;  
+}

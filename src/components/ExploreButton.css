@@ -1,0 +1,39 @@
+/* Base button styles */
+.explore-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 100px;
+    width: 9rem;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  /* Primary button styles */
+  .explore-button.primary {
+    background-color: var(--accent-color);
+    color: black;
+    border: none;
+  }
+  
+  .explore-button.primary:hover {
+    background-color: white;
+    color: black;
+  }
+  
+  /* Secondary button styles */
+  .explore-button.secondary {
+    background-color: black;
+    color: white;
+    border: 2px solid var(--accent-color);
+  }
+  
+  .explore-button.secondary:hover {
+    background-color: var(--accent-color);
+    color: black;
+  }
+  

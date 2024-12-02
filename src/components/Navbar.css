@@ -1,0 +1,133 @@
+:root {
+  --nav-height: 80px;
+  --side-nav-width: 200px;
+  --accent-color: #01e6e6;
+}
+
+.navbar {
+  position: fixed; /* nav bar will always be at the top */
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+  height: var(--nav-height);
+  border-bottom: 1px solid var(--border-color);
+  padding: 30px;
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center; /* Center the navbar links */
+}
+
+.navbar-center .nav-links {
+  display: flex;
+  gap: 50px;
+}
+
+.navbar-center .nav-links a {
+  color: white;
+  font-size: smaller;
+}
+
+.navbar-center .nav-links a:hover {
+  text-decoration: underline;
+}
+
+.navbar-left {
+  width: var(--side-nav-width);
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 30px;
+  width: var(--side-nav-width);
+}
+
+.logo-image {
+  width: calc(var(--side-nav-width) - 50px);
+  height: auto;
+  padding-bottom: 5px; /* the image is not perfectly symmetrical */
+}
+
+/* .explore-button {
+  display: flex;
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: var(--accent-color);
+  width: 150px;
+  color: black;
+  border-radius: 100px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  font-size: smaller;
+}
+
+.explore-button:hover {
+  color: black;
+  background-color: white;
+  text-decoration: none;
+} */
+
+.hamburger {
+  font-size: 30px;
+  display: none;
+}
+
+/* User Icon Styles */
+.user-icon {
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    transition: font-size 0.3s ease;
+  }
+
+body {
+  padding-top: var(--nav-height); /* Needs to be offset by the navigation bar */
+}
+
+@media (max-width: 830px) {
+  /* this is what apple.com uses */
+  .explore-button {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+    background-color: inherit;
+    border: none;
+    outline: none;
+  }
+
+  .navbar-center .nav-links {
+    display: none; /* Hide the nav links by default */
+    position: absolute;
+    top: var(--nav-height); /* Adjust based on navbar height */
+    background-color: white;
+    color: black;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 10px 0;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .navbar-center .nav-links a {
+    color: black;
+    font-size: large;
+  }
+
+  .nav-links.active {
+    display: flex; /* show the nav links when the hamburger is clicked */
+  }
+}
+
+

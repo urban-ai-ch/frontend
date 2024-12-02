@@ -1,0 +1,46 @@
+// import React from "react";
+import "./HomePage.css";
+import BigHeroSection from "./BigHeroSection";
+import SmallImageWithText from "./SmallImageWithText";
+import GallerySection from "./GallerySection";
+import ExploreButton from "./ExploreButton";
+import homepageSmall1 from "../img/homepageSmall1.jpeg";
+import homepageSmall2 from "../img/homepageSmall2.jpeg";
+import homepageSmall3 from "../img/homepageSmall3.webp";
+import homepageSmall4 from "../img/homepageSmall4.jpeg";
+
+const HomePage = () => {
+  return (
+    <div className="homepage-container">
+      <BigHeroSection />
+      <SmallImageWithText
+        imageSrc={homepageSmall1}
+        title="section1"
+        description="Obtain intelligent architectural insigts through an AI powered state-of-the art approach."
+      />
+      <SmallImageWithText
+        imageSrc={homepageSmall2}
+        title="section2"
+        description="Discover a vast and curated dataset from five major cities in the world, including Zurich, Mumbai and Melbourne."
+        reverse
+      />
+      <SmallImageWithText
+        imageSrc={homepageSmall3}
+        title="section3"
+        description="Upload your own images to optain information that matters to you."
+      />
+      <SmallImageWithText
+        imageSrc={homepageSmall4}
+        title="section4"
+        description="Use our Google StreetView integration to obtain high-quality insights into locations you do not have access to."
+        reverse
+      />
+      <GallerySection />
+      <div className="explore-button-at-the-bottom">
+        <ExploreButton label="Explore" to="/tool" variant="primary" />
+      </div>
+    </div>
+  );
+};
+
+export default HomePage;

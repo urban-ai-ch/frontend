@@ -1,0 +1,86 @@
+.big-hero-section {
+  position: relative;
+  width: 100%;
+  height: 35rem; /* Adjust height as needed */
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire container */
+  border-radius: 10px;
+}
+  
+.hero-content {
+  /* border: 1px solid #ccc; */
+  position: absolute;
+  top: 50%; /* Vertically center the content */
+  left: 3%; /* Position the text on the left side */
+  max-width: 45%; /* Limit the width of the content */
+  transform: translateY(-50%); /* Only vertically center the content */
+  text-align: left; /* Align text to the left */
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  color: white; /* Set text color explicitly */
+}
+
+/* Position the button on the right side */
+.hero-content .explore-button {
+  margin-top: 2.5rem;
+}
+
+/* Styling for the image source */
+.image-source {
+  position: absolute;
+  bottom: 1%; /* Position at the bottom */
+  right: 1%; /* Position at the right */
+  font-size: 0.5rem; /* Slightly smaller text */
+  color: white; /* Match text color to the content */
+  background-color: rgba(0, 0, 0, 0.5); /* Optional: semi-transparent background for readability */
+  padding: 0.5rem;
+  border-radius: 5px; /* Slightly rounded corners */
+}
+  
+.image-source a {
+  color: lightblue; /* Link color */
+  text-decoration: none;
+}
+
+.image-source a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 1500px) {
+  .hero-content {
+    max-width: 60%; /* Allow content to use more width */
+  }
+}
+
+@media (max-width: 835px) {
+  .big-hero-section {
+    height: 25rem; /* Reduce height on smaller screens */
+  }
+
+  .hero-content {
+    max-width: 80%; /* Use more width on small screens */
+    left: 5%; /* Maintain left alignment */
+    padding: 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem; /* Reduce font size */
+  }
+
+  .hero-content .explore-button {
+    margin-top: 1rem;
+  }
+
+  .image-source {
+    font-size: 0.6rem; /* Adjust font size for readability */
+  }
+}

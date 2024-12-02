@@ -1,0 +1,6 @@
+.map-container {
+    position: relative;
+    width: 100%;
+    /* Adjust for more space for filters */
+    height: calc(100vh - 29vh); 
+}

@@ -1,0 +1,76 @@
+.small-image-with-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 100rem;
+  margin: 2rem auto; /* 2rem top and bottom margins, auto left and right margins */
+  /* gap: 2rem; */
+  padding: 2rem;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 10px; */
+  /* background-color: #f9f9f9; */
+}
+
+/* flex-grow: 0 - The item will not grow to fill available space beyond its flex-basis. */
+/* flex-shrink: 0 - The item will not shrink below its flex-basis. -> with 1 it will shrink */
+/* flex-basis: 40% - The initial size of the item is set to 50% of the container's main size. */
+.small-image-with-text .image {
+  flex: 0 1 40%; 
+  max-width: 20rem;
+  min-width: 12rem;
+  height: auto;
+  max-height: 20rem;
+  object-fit: cover;
+  border-radius: 10px;
+  order: 1;
+}
+
+.small-image-with-text .text-content {
+  flex: 0 1 60%;
+  max-width: 50rem;
+  padding: 0 2rem;
+  order: 2;
+  color: white;
+}
+
+.small-image-with-text.reverse .image {
+  order: 2;
+}
+
+.small-image-with-text.reverse .text-content {
+  order: 1;
+  color: white;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 835px) {
+  .small-image-with-text,
+  .small-image-with-text.reverse {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .small-image-with-text .image,
+  .small-image-with-text.reverse .image {
+    order: 1;
+    width: 80%;
+    max-width: 18rem;
+    margin-bottom: 1rem;
+  }
+
+  .small-image-with-text .text-content,
+  .small-image-with-text.reverse .text-content {
+    order: 2;
+    /* width: 100%; */
+    /* max-width: none; */
+  }
+
+  .small-image-with-text h3,
+  .small-image-with-text.reverse h3 {
+    font-size: 1.5rem;
+    line-height: 1.4;
+  }
+}

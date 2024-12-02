@@ -2,11 +2,9 @@ import { useState } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
 
-import "./tool.css"
-
+import "./tool.css";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
-
   interface LocationOption {
     label: string;
     value: [number, number]; // Tuple for longitude and latitude
@@ -18,14 +16,16 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   }
 
   const findLabelByValue = (value: [number, number]): string | undefined => {
-    const option = locationOptions.find((option) =>
-      option.value[0] === value[0] && option.value[1] === value[1]
+    const option = locationOptions.find(
+      (option) => option.value[0] === value[0] && option.value[1] === value[1]
     );
     return option?.label; // Return the label or undefined if not found
   };
 
-  const getCoordinatesByLabel = (label: string): [number, number] | undefined => {
-    const location = locationOptions.find(option => option.label === label);
+  const getCoordinatesByLabel = (
+    label: string
+  ): [number, number] | undefined => {
+    const location = locationOptions.find((option) => option.label === label);
     return location?.value;
   };
 
@@ -38,11 +38,10 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     { label: "Rio", value: [-43.1729, -22.9068] },
   ];
 
-
   const datasetOptions: DatasetOption[] = [
     { label: "Footprints", value: "footprints.geojson" },
-    { label: "Materials", value: "materials.geojson" }
-  ]
+    { label: "Materials", value: "materials.geojson" },
+  ];
 
   const [coordinates, setCoordinates] = useState<[number, number]>(
     getCoordinatesByLabel(defaultLocation) ?? [0, 0] // Default to Zurich
@@ -57,28 +56,33 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           name="city"
           options={locationOptions}
           placeholder="Choose a city..."
-          onChange={(newCoords: [number, number]) =>
-            setCoordinates(newCoords)
-          }
+          onChange={(newCoords: [number, number]) => setCoordinates(newCoords)}
         />
         <DropdownMenu
           name="dataset"
           options={datasetOptions}
           placeholder="Choose a dataset..."
-          onChange={(newDataset: string) =>
-            setDataset(newDataset)
-          }
+          onChange={(newDataset: string) => setDataset(newDataset)}
         />
       </div>
 
       <>
-        {console.log("geojson_output/" + findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, '') + '_' + dataset)}
+        {console.log(
+          "geojson_output/" +
+            findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, "") +
+            "_" +
+            dataset
+        )}
         <MapComponent
           coordinates={coordinates}
-          dataset={"geojson_output/" + findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, '') + '_' + dataset}
+          dataset={
+            "geojson_output/" +
+            findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, "") +
+            "_" +
+            dataset
+          }
         />
       </>
-
     </div>
   );
 };

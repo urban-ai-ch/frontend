@@ -12,6 +12,7 @@ const ImageUploader: React.FC = () => {
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Fetch the list of uploaded images from the backend
   useEffect(() => {
     const fetchImages = async () => {
       try {
@@ -30,23 +31,26 @@ const ImageUploader: React.FC = () => {
     fetchImages();
   }, []);
 
+  // Handle file input changes and generate preview URLs
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (files) {
       const fileArray = Array.from(files);
       setImages(fileArray);
 
+      // Create local preview URLs for the images
       const urls = fileArray.map((file) => URL.createObjectURL(file));
       setPreviewUrls(urls);
     }
   };
 
+  // Handle form submission to upload images to the backend
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setLoading(true);
 
     const formData = new FormData();
-    images.forEach((image) => formData.append("image", image));
+    images.forEach((image) => formData.append("image", image)); // Append each image to the FormData object
 
     try {
       const response = await fetch("/images/v1/image", {
@@ -59,6 +63,7 @@ const ImageUploader: React.FC = () => {
         setImages([]);
         setPreviewUrls([]);
 
+        // Fetch the updated list of uploaded images from the backend
         const refreshedImages = await fetch("/images/v1/images").then((res) =>
           res.json()
         );
@@ -78,10 +83,11 @@ const ImageUploader: React.FC = () => {
     <div className="image-uploader-container">
       <h1 className="image-uploader-title">Image Uploader</h1>
 
+      {/* Upload Form */}
       <form className="upload-form" onSubmit={handleSubmit}>
         <input
           type="file"
-          accept="image/jpeg"
+          accept="image/jpeg, image/png" // Accept both JPG and PNG images
           multiple
           onChange={handleFileChange}
         />
@@ -91,15 +97,22 @@ const ImageUploader: React.FC = () => {
         </button>
       </form>
 
+      {/* Preview Section */}
       <div className="preview-section">
         <h3>Preview</h3>
         <div className="preview-images">
           {previewUrls.map((url, index) => (
-            <img key={index} src={url} alt={`Preview ${index}`} />
+            <img
+              key={index}
+              src={url}
+              alt={`Preview ${index}`}
+              className="preview-image"
+            />
           ))}
         </div>
       </div>
 
+      {/* Uploaded Images Section */}
       <div className="uploaded-images-section">
         <h3>Uploaded Images</h3>
         <ul className="uploaded-images-list">

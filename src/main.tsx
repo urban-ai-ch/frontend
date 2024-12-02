@@ -16,5 +16,5 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 );
 
 export const config = {
-  baseUrl: "https://webdev-hs24.gerberservices.com",
+  baseUrl: "https://api.urban-ai.ch",
 };

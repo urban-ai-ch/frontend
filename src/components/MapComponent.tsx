@@ -42,7 +42,6 @@ export function MapComponent({
           zoom: 13,
         }),
       });
-
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
@@ -58,7 +57,7 @@ export function MapComponent({
           format: new GeoJSON(),
         }),
       });
-      
+
       mapRef.current?.addLayer(datasetLayer);
 
       return () => {

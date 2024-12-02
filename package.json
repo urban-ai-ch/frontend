@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "npm run build && npx wrangler pages deploy dist",
     "format": "prettier .  --write",
     "tsc": "tsc"
   },
@@ -31,6 +32,7 @@
     "@vitejs/plugin-react": "^4.3.2",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3",
-    "vite": "^5.4.9"
+    "vite": "^5.4.9",
+    "wrangler": "^3.91.0"
   }
 }

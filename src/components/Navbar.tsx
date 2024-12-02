@@ -48,7 +48,7 @@ export function Navbar() {
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/about">Code</Link>
+            <Link to="/about">About</Link>
           </li>
           <li>
             <Link to="/code">Code</Link>

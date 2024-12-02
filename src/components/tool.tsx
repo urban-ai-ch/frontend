@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
+import InputButton from "./InputButton";
 
 import "./tool.css";
 
@@ -64,6 +65,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           placeholder="Choose a dataset..."
           onChange={(newDataset: string) => setDataset(newDataset)}
         />
+        <InputButton label="Input" to="/Input" variant="primary" />
       </div>
 
       <>

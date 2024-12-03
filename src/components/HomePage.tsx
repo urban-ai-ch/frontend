@@ -8,8 +8,12 @@ import homepageSmall1 from "../img/homepageSmall1.jpeg";
 import homepageSmall2 from "../img/homepageSmall2.jpeg";
 import homepageSmall3 from "../img/homepageSmall3.webp";
 import homepageSmall4 from "../img/homepageSmall4.jpeg";
+import { useAuth } from "../AuthContext";
 
 const HomePage = () => {
+
+  const auth = useAuth();
+
   return (
     <div className="homepage-container">
       <BigHeroSection />
@@ -37,7 +41,7 @@ const HomePage = () => {
       />
       <GallerySection />
       <div className="explore-button-at-the-bottom">
-        <ExploreButton label="Explore" to="/tool" variant="primary" />
+        <ExploreButton label="Explore" to={auth.isAuthenticated ? "/tool" : "/login"} variant="primary" />
       </div>
     </div>
   );

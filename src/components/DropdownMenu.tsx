@@ -11,11 +11,16 @@ export function DropdownMenu({
   placeholder: string;
   onChange: (value: any) => void;
 }) {
+  
   // Assume that the placeholder is the default value when nothing is selected
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    onChange(selectedValue); // Send the selected value directly
-  };
+        const selectedIndex = event.target.selectedIndex - 1;
+        const selectedOption = options[selectedIndex];
+        if (selectedOption) {
+            onChange(selectedOption.value);
+        }
+    };
+
 
   return (
     <div>

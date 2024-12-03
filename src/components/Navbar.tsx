@@ -13,6 +13,10 @@ export function Navbar() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  }
+
   // Handle user icon click
   const handleUserIconClick = () => {
     const newState = !isUserIconActive;
@@ -48,13 +52,13 @@ export function Navbar() {
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" onClick={closeMenu}>About</Link>
           </li>
           <li>
-            <Link to="/code">Code</Link>
+            <Link to="/code" onClick={closeMenu}>Code</Link>
           </li>
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" onClick={closeMenu}>Contact</Link>
           </li>
         </ul>
       </div>

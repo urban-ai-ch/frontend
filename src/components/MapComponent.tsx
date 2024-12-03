@@ -42,12 +42,30 @@ export function MapComponent({
           zoom: 13,
         }),
       });
+
+      // Add click event listener to get feature properties
+      mapRef.current.on("singleclick", (event) => {
+
+        mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
+        const properties = feature.getProperties();
+
+        // const popup = new Overlay({
+        //   element: document.getElementById('popup'),
+        // });
+        // mapRef.addOverlay(popup);
+
+
+        console.log(properties);
+        });
+
+      });
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
       mapRef.current.getView().setZoom(13);
     }
   }, [coordinates]);
+
 
   useEffect(() => {
     if (dataset) {
@@ -65,7 +83,7 @@ export function MapComponent({
         mapRef.current?.removeLayer(datasetLayer);
       };
     }
-    return () => {};
+    return () => { };
   }, [dataset]);
 
   return <div id="map" className="map-container" />;

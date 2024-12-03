@@ -6,6 +6,7 @@ import InputButton from "./InputButton";
 import "./Tool.css";
 import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
+import GeoJSON from "ol/format/GeoJSON";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   const { logout } = useAuth();
@@ -53,7 +54,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   );
 
   const [dataset, setDataset] = useState<string | null>(null);
-  const [geoJSON, setGeoJSON] = useState<string | null>(null);
+  const [geoJSON, setGeoJSON] = useState<GeoJSON | null>(null);
 
   // Function to fetch GeoJSON data
   const fetchGeoJSON = async (
@@ -70,7 +71,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     }
 
     try {
-      const response = await apiRequest<string>(
+      const response = await apiRequest<GeoJSON>(
         `/geojson/v1/geojson/${label}_${dataset}`,
         {
           headers: {
@@ -79,8 +80,6 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
         },
         logout
       );
-
-      console.log(response.data);
 
       if (response.status === "success" && response.data) {
         setGeoJSON(response.data);
@@ -121,7 +120,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
       </div>
 
       <>
-        <MapComponent coordinates={coordinates} dataset={geoJSON ?? ""} />
+        <MapComponent coordinates={coordinates} dataset={geoJSON ?? undefined} />
       </>
     </div>
   );

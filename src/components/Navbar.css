@@ -83,11 +83,11 @@
 
 /* User Icon Styles */
 .user-icon {
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    transition: font-size 0.3s ease;
-  }
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+  transition: font-size 0.3s ease;
+}
 
 body {
   padding-top: var(--nav-height); /* Needs to be offset by the navigation bar */
@@ -129,5 +129,3 @@ body {
     display: flex; /* show the nav links when the hamburger is clicked */
   }
 }
-
-

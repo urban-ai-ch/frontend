@@ -1,0 +1,43 @@
+/* DropdownMenu.css */
+select {
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  font-size: 1rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  align-items: center;
+  height: 4.5vh;
+  margin-top: 0.2vh;
+  width: 100%; /* Ensures the dropdown adjusts to available width */
+  box-sizing: border-box; /* Includes padding and border in the width/height */
+}
+
+select:focus {
+  outline: none;
+  border-color: #ff009d; /* Matches the primary button style */
+}
+
+option {
+  padding: 10px; /* Adds padding for dropdown options */
+}
+
+select.primary {
+  background-color: #ff009d;
+  color: white;
+}
+
+select.primary:hover {
+  background-color: #b3007d;
+}
+
+select.secondary {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+select.secondary:hover {
+  background-color: #e2e6ea;
+}

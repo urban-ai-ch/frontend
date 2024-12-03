@@ -1,4 +1,3 @@
-import { useAuth } from "./AuthContext";
 const API_URL = "https://api.urban-ai.ch";
 
 interface RequestOptions extends RequestInit {

@@ -1,5 +1,8 @@
 # URBAN-AI
 
+## IMPORTANT
+This repo is not up to date and still contains stuff from the old repo and old structure
+
 ## Team Members
 
 1. Patrick Eugster

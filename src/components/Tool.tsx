@@ -3,7 +3,7 @@ import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
 import InputButton from "./InputButton";
 
-import "./tool.css";
+import "./Tool.css";
 import { apiRequest } from "../api";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {

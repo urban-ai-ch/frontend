@@ -13,6 +13,7 @@ const LoginDropdown: React.FC = () => {
   };
 
   const handleLogInOut = () => {
+    setIsOpen(false);
     if (!auth.isAuthenticated) navigate('/login');
     else {
         auth.logout();
@@ -21,6 +22,7 @@ const LoginDropdown: React.FC = () => {
   };
 
   const handleProfile = () => {
+    setIsOpen(false);
     console.log('Profile clicked'); // TODO: Add profile page here
   };
 

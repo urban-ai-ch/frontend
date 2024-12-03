@@ -45,7 +45,7 @@ export function Navbar() {
     <nav className="navbar">
       <div className="navbar-left">
         <a href="/" className="logo">
-          <img src="src/img/eth-logo.svg" alt="logo" className="logo-image" />
+          <img src="eth-logo.svg" alt="logo" className="logo-image" />
         </a>
       </div>
 

@@ -1,8 +1,8 @@
 import "./login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { config } from "../main";
 import { useAuth } from "../AuthContext";
+import { apiRequest } from "../api";
 
 type AuthTokenResponse = {
   token: string;
@@ -13,22 +13,25 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Used for navigation
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const fetchResponse = await fetch(config.baseUrl + "/auth/v1/signin", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+    const response = await apiRequest<AuthTokenResponse>(
+      "/auth/v1/signin",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      },
+      logout
+    );
 
-    if (fetchResponse.ok) {
-      const payload: AuthTokenResponse = await fetchResponse.json();
-      login(payload.token);
+    if (response.status === "success" && response.data) {
+      login(response.data.token);
       setError("");
       navigate("/");
     } else {

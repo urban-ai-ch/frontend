@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
 import InputButton from "./InputButton";
 
-import "./tool.css";
+import "./Tool.css";
+import { apiRequest } from "../api";
+import { useAuth } from "../AuthContext";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
+  const { logout } = useAuth();
+
   interface LocationOption {
     label: string;
     value: [number, number]; // Tuple for longitude and latitude
@@ -45,20 +49,58 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   ];
 
   const [coordinates, setCoordinates] = useState<[number, number]>(
-    getCoordinatesByLabel(defaultLocation) ?? [0, 0] // Default to Zurich
+    getCoordinatesByLabel(defaultLocation) ?? [0, 0]
   );
 
-  const [dataset, setDataset] = useState<string | undefined>(undefined);
+  const [dataset, setDataset] = useState<string | null>(null);
+  const [geoJSON, setGeoJSON] = useState<string | null>(null);
 
-  const getGeoJSONUrl = (
+  // Function to fetch GeoJSON data
+  const fetchGeoJSON = async (
     coordinates: [number, number],
     dataset: string | undefined
-  ) =>
-    `https://geojson.urban-ai.ch/${findLabelByValue(coordinates)
+  ) => {
+    const label = findLabelByValue(coordinates)
       ?.toLowerCase()
-      .replace(/\s/g, "")}_${dataset}`;
+      .replace(/\s/g, "");
+    if (!label || !dataset) {
+      console.error("Invalid coordinates or dataset");
+      setGeoJSON(null);
+      return;
+    }
 
-  const geoJSONUrl = getGeoJSONUrl(coordinates, dataset);
+    try {
+      const response = await apiRequest<string>(
+        `/geojson/v1/geojson/${label}_${dataset}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+        logout
+      );
+
+      console.log(response.data);
+
+      if (response.status === "success" && response.data) {
+        setGeoJSON(response.data);
+      } else {
+        console.error("Failed to fetch GeoJSON:", response.message);
+        setGeoJSON(null);
+        return;
+      }
+    } catch (error) {
+      console.error("Error fetching GeoJSON:", error);
+      setGeoJSON(null);
+    }
+  };
+
+  // UseEffect to fetch GeoJSON whenever coordinates or dataset change
+  useEffect(() => {
+    if (coordinates && dataset) {
+      fetchGeoJSON(coordinates, dataset);
+    }
+  }, [coordinates, dataset]);
 
   return (
     <div className="tool-container">
@@ -79,8 +121,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
       </div>
 
       <>
-        {console.log(geoJSONUrl)}
-        <MapComponent coordinates={coordinates} dataset={geoJSONUrl} />
+        <MapComponent coordinates={coordinates} dataset={geoJSON ?? ""} />
       </>
     </div>
   );

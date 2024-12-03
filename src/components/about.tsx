@@ -1,112 +1,66 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./contact.css";
+import React from "react";
+import "./about.css";
+import Sai from "../img/266.webp";
+import Noah from "../img/266.webp";
+import Patrick from "../img/266.webp";
+import Eren from "../img/266.webp";
 
-export default function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
+interface TeamMember {
+  image: string; // URL for the member's picture
+  name: string; // Name of the team member
+  description: string; // Description for the team member
+}
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    if (!name || !email || !message) {
-      setError("All fields are required!");
-      return;
-    }
-
-    try {
-      const response = await fetch("https://example.com/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name, email, message }),
-      });
-
-      if (response.ok) {
-        setSuccess(true);
-        setError("");
-        setName("");
-        setEmail("");
-        setMessage("");
-        setTimeout(() => navigate("/"), 2000); // Redirect after 2 seconds
-      } else {
-        setError("Failed to send your message. Please try again.");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again later.");
-    }
-  };
+const TeamPage: React.FC = () => {
+  const teamName = "Teamoty Roscoe";
+  const teamDescription =
+    "We are a team of talented individuals working together to build amazing projects!";
+  const teamMembers: TeamMember[] = [
+    {
+      image: Sai,
+      name: "Sai",
+      description: "Frontend Developer",
+    },
+    {
+      image: Noah,
+      name: "Noah",
+      description:
+        "Backend Developer <br> <br> Meet Noah the ultimate charmer who seems to have mastered the universal language of wit and confidence. Whether it’s the barista brewing his coffee, the elderly neighbor tending her roses, or the group of friends at the next table, he’s got a knack for making everyone feel special. With a mischievous grin, a pocket full of clever compliments, and the uncanny ability to leave anyone smiling, [Name] isn’t bound by age or circumstance. He’s not just smooth—he’s a walking rom-com, spreading warmth, laughter, and maybe just a little blush wherever he goes.",
+    },
+    {
+      image: Patrick,
+      name: "Patrick",
+      description: "UI/UX Designer",
+    },
+    {
+      image: Eren,
+      name: "Eren",
+      description: "Project Manager",
+    },
+  ];
 
   return (
-    <div className="contact-container">
-      <h1 className="contact-title">Contact Us</h1>
-      <form onSubmit={handleSubmit} className="contact-form">
-        {/* Name Field */}
-        <div className="form-group">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            id="name"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="form-input"
-            placeholder="Enter your name"
-            required
-          />
-        </div>
-
-        {/* Email Field */}
-        <div className="form-group">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            id="email"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="form-input"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-
-        {/* Message Field */}
-        <div className="form-group">
-          <label htmlFor="message" className="form-label">
-            Message
-          </label>
-          <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="form-input"
-            placeholder="Enter your message"
-            rows={5}
-            required
-          ></textarea>
-        </div>
-
-        {/* Error Message */}
-        {error && <div className="form-error">{error}</div>}
-
-        {/* Success Message */}
-        {success && (
-          <div className="form-success">Message sent successfully!</div>
-        )}
-
-        {/* Submit Button */}
-        <button type="submit" className="submit-button">
-          Send Message
-        </button>
-      </form>
+    <div className="team-container">
+      <h1 className="team-name">{teamName}</h1>
+      <p className="team-description">{teamDescription}</p>
+      <div className="team-members">
+        {teamMembers.map((member, index) => (
+          <div key={index} className="team-member">
+            <img
+              src={member.image}
+              alt={`${member.name}'s profile`}
+              className="team-member-image"
+            />
+            <h2 className="team-member-name">{member.name}</h2>
+            <div
+              className="team-member-description"
+              dangerouslySetInnerHTML={{ __html: member.description }}
+            ></div>
+          </div>
+        ))}
+      </div>
     </div>
   );
-}
+};
+
+export default TeamPage;

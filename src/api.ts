@@ -1,6 +1,7 @@
 import { useAuth } from "./AuthContext";
 
 const API_URL = "https://api.urban-ai.ch";
+const { logout } = useAuth();
 
 interface RequestOptions extends RequestInit {
   body?: string;
@@ -33,7 +34,7 @@ async function apiRequest<T>(
   });
 
   if (response.status === 401) {
-    useAuth().logout();
+    logout();
     return {
       status: "error",
       message: "Unauthorized, logged out",

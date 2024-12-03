@@ -5,8 +5,11 @@ import InputButton from "./InputButton";
 
 import "./Tool.css";
 import { apiRequest } from "../api";
+import { useAuth } from "../AuthContext";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
+  const { logout } = useAuth();
+
   interface LocationOption {
     label: string;
     value: [number, number]; // Tuple for longitude and latitude
@@ -73,8 +76,11 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
+        logout
       );
+
+      console.log(response.data);
 
       if (response.status === "success" && response.data) {
         setGeoJSON(response.data);

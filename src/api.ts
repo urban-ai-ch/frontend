@@ -1,7 +1,5 @@
 import { useAuth } from "./AuthContext";
-
 const API_URL = "https://api.urban-ai.ch";
-const { logout } = useAuth();
 
 interface RequestOptions extends RequestInit {
   body?: string;
@@ -18,9 +16,10 @@ interface ApiResponse<T> {
 // Function to handle requests and common error handling
 async function apiRequest<T>(
   endpoint: string,
-  options: RequestOptions = {}
+  options: RequestOptions = {},
+  logout: () => void
 ): Promise<ApiResponse<T>> {
-  const token = localStorage.getItem("token"); // Get the auth token
+  const token = localStorage.getItem("authToken"); // Get the auth token
 
   // Add token to headers if present
   const headers = {

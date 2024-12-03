@@ -13,18 +13,22 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Used for navigation
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await apiRequest<AuthTokenResponse>("/auth/v1/signin", {
-      method: "POST",
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+    const response = await apiRequest<AuthTokenResponse>(
+      "/auth/v1/signin",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      },
+      logout
+    );
 
     if (response.status === "success" && response.data) {
       login(response.data.token);

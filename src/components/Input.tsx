@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Input.css";
 import { apiRequest } from "../api";
+import { useAuth } from "../AuthContext";
 
 type ImagesResponse = {
   name: string;
@@ -17,7 +18,11 @@ const ImageUploader: React.FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await apiRequest<ImagesResponse>("/images/v1/images");
+        const response = await apiRequest<ImagesResponse>(
+          "/images/v1/images",
+          {},
+          useAuth().logout
+        );
         if (response.status === "success" && response.data) {
           setUploadedImages(response.data);
         } else {
@@ -53,10 +58,14 @@ const ImageUploader: React.FC = () => {
     images.forEach((image) => formData.append("image", image)); // Append each image to the FormData object
 
     try {
-      const uploadResponse = await apiRequest("/images/v1/image", {
-        method: "POST",
-        body: JSON.stringify(formData),
-      });
+      const uploadResponse = await apiRequest(
+        "/images/v1/image",
+        {
+          method: "POST",
+          body: JSON.stringify(formData),
+        },
+        useAuth().logout
+      );
 
       if (uploadResponse.status === "success") {
         alert("Images uploaded successfully!");
@@ -64,8 +73,11 @@ const ImageUploader: React.FC = () => {
         setPreviewUrls([]);
 
         //TODO: dont pull but "calculate" the new uploadedImages locally
-        const imagesResponse =
-          await apiRequest<ImagesResponse>("/images/v1/images");
+        const imagesResponse = await apiRequest<ImagesResponse>(
+          "/images/v1/images",
+          {},
+          useAuth().logout
+        );
         if (imagesResponse.status === "success" && imagesResponse.data)
           setUploadedImages(imagesResponse.data);
       } else {

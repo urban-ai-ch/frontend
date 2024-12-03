@@ -1,8 +1,8 @@
 import "./login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { config } from "../main";
 import { useAuth } from "../AuthContext";
+import { apiRequest } from "../api";
 
 type AuthTokenResponse = {
   token: string;
@@ -18,7 +18,7 @@ export default function Login() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const fetchResponse = await fetch(config.baseUrl + "/auth/v1/signin", {
+    const response = await apiRequest<AuthTokenResponse>("/auth/v1/signin", {
       method: "POST",
       body: JSON.stringify({
         username: username,
@@ -26,9 +26,8 @@ export default function Login() {
       }),
     });
 
-    if (fetchResponse.ok) {
-      const payload: AuthTokenResponse = await fetchResponse.json();
-      login(payload.token);
+    if (response.status === "success" && response.data) {
+      login(response.data.token);
       setError("");
       navigate("/");
     } else {

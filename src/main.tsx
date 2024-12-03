@@ -14,7 +14,3 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     </AuthProvider>
   </React.StrictMode>
 );
-
-export const config = {
-  baseUrl: "https://api.urban-ai.ch",
-};

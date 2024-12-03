@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Input.css";
+import { apiRequest } from "../api";
 
 type ImagesResponse = {
   name: string;
@@ -16,10 +17,9 @@ const ImageUploader: React.FC = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await fetch("/images/v1/images");
-        if (response.ok) {
-          const data: ImagesResponse = await response.json();
-          setUploadedImages(data);
+        const response = await apiRequest<ImagesResponse>("/images/v1/images");
+        if (response.status === "success" && response.data) {
+          setUploadedImages(response.data);
         } else {
           console.error("Failed to fetch images.");
         }
@@ -53,21 +53,21 @@ const ImageUploader: React.FC = () => {
     images.forEach((image) => formData.append("image", image)); // Append each image to the FormData object
 
     try {
-      const response = await fetch("/images/v1/image", {
+      const uploadResponse = await apiRequest("/images/v1/image", {
         method: "POST",
-        body: formData,
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      if (uploadResponse.status === "success") {
         alert("Images uploaded successfully!");
         setImages([]);
         setPreviewUrls([]);
 
-        // Fetch the updated list of uploaded images from the backend
-        const refreshedImages = await fetch("/images/v1/images").then((res) =>
-          res.json()
-        );
-        setUploadedImages(refreshedImages);
+        //TODO: dont pull but "calculate" the new uploadedImages locally
+        const imagesResponse =
+          await apiRequest<ImagesResponse>("/images/v1/images");
+        if (imagesResponse.status === "success" && imagesResponse.data)
+          setUploadedImages(imagesResponse.data);
       } else {
         alert("Failed to upload images.");
       }

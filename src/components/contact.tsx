@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./contact.css";
+import { apiRequest } from "../api";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -19,7 +20,7 @@ export default function Contact() {
     }
 
     try {
-      const response = await fetch("https://example.com/api/contact", {
+      const response = await apiRequest<never>("/contact/v1", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +28,7 @@ export default function Contact() {
         body: JSON.stringify({ name, email, message }),
       });
 
-      if (response.ok) {
+      if (response.status === "success") {
         setSuccess(true);
         setError("");
         setName("");

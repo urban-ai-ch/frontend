@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import ExploreButton from "./ExploreButton"; // Import ExploreButtonZ
 import { Link } from "react-router-dom";
+import LoginDropdown from "./LoginDropdown";
+import { useAuth } from "../AuthContext";
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isUserIconActive, setIsUserIconActive] = useState(false); // Track user icon state
-  const navigate = useNavigate(); // Hook for programmatic navigation
+  // const [isUserIconActive, setIsUserIconActive] = useState(false); // Track user icon state
+  // const navigate = useNavigate(); // Hook for programmatic navigation
+  const auth = useAuth();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -18,11 +21,11 @@ export function Navbar() {
   }
 
   // Handle user icon click
-  const handleUserIconClick = () => {
-    const newState = !isUserIconActive;
-    setIsUserIconActive(newState);
-    navigate(newState ? "/login" : "/"); // Navigate based on new state
-  };
+  // const handleUserIconClick = () => {
+  //   const newState = !isUserIconActive;
+  //   setIsUserIconActive(newState);
+  //   navigate(newState ? "/login" : "/"); // Navigate based on new state
+  // };
 
   // Handle screen resizing
   useEffect(() => {
@@ -71,7 +74,7 @@ export function Navbar() {
         {/* <Link to="/tool" className="explore-button">
           Explore
         </Link> */}
-        <ExploreButton label="Explore" to="/tool" variant="primary" />
+        <ExploreButton label="Explore" to={auth.isAuthenticated ? "/tool" : "/login"} variant="primary" />
 
         {/* Hamburger Button */}
         <button className="hamburger" onClick={toggleMenu}>
@@ -79,12 +82,13 @@ export function Navbar() {
         </button>
 
         {/* User Icon */}
-        <div
+        <LoginDropdown></LoginDropdown>
+        {/* <div
           className={`user-icon-container ${isUserIconActive ? "active" : ""}`}
           onClick={handleUserIconClick}
         >
           <i className="fa fa-user user-icon" />
-        </div>
+        </div> */}
       </div>
     </nav>
   );

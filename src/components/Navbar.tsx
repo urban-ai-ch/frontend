@@ -64,7 +64,7 @@ export function Navbar() {
             <Link to="/contact" onClick={closeMenu}>Contact</Link>
           </li>
           <li className="navbar-tool-button">
-            <Link to="/tool" onClick={closeMenu}>Explore</Link>
+            <Link  to={auth.isAuthenticated ? "/tool" : "/login"} onClick={closeMenu}>Explore</Link>
           </li>
         </ul>
       </div>

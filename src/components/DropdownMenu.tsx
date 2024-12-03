@@ -1,4 +1,5 @@
 import "./DropdownMenu.css";
+
 export function DropdownMenu({
   name,
   options,
@@ -10,22 +11,25 @@ export function DropdownMenu({
   placeholder: string;
   onChange: (value: any) => void;
 }) {
+  // Assume that the placeholder is the default value when nothing is selected
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedIndex = event.target.selectedIndex - 1;
-    const selectedOption = options[selectedIndex];
-    if (selectedOption) {
-      onChange(selectedOption.value);
-    }
+    const selectedValue = event.target.value;
+    onChange(selectedValue); // Send the selected value directly
   };
 
   return (
     <div>
-      <select id={name} name={name} onChange={handleChange}>
-        <option value="" disabled selected>
+      <select
+        id={name}
+        name={name}
+        onChange={handleChange}
+        defaultValue="" // This ensures the placeholder is displayed by default
+      >
+        <option value="" disabled>
           {placeholder}
         </option>
         {options.map((option, index) => (
-          <option key={index} value={option.label}>
+          <option key={index} value={option.value}>
             {option.label}
           </option>
         ))}

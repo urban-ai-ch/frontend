@@ -14,7 +14,7 @@ export function MapComponent({
   dataset,
 }: {
   coordinates: [number, number];
-  dataset: string | undefined;
+  dataset: GeoJSON | undefined;
 }) {
   const mapRef = useRef<Map | null>(null);
   const vectorSourceRef = useRef<VectorSource | null>(null);
@@ -44,21 +44,21 @@ export function MapComponent({
       });
 
       // Add click event listener to get feature properties
-      mapRef.current.on("singleclick", (event) => {
+      // mapRef.current.on("singleclick", (event) => {
 
-        mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
-        const properties = feature.getProperties();
+      //   mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
+      //   const properties = feature.getProperties();
 
-        // const popup = new Overlay({
-        //   element: document.getElementById('popup'),
-        // });
-        // mapRef.addOverlay(popup);
+      //   // const popup = new Overlay({
+      //   //   element: document.getElementById('popup'),
+      //   // });
+      //   // mapRef.addOverlay(popup);
 
 
-        console.log(properties);
-        });
+      //   console.log(properties);
+      //   });
 
-      });
+      // });
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
@@ -71,8 +71,9 @@ export function MapComponent({
     if (dataset) {
       const datasetLayer = new VectorLayer({
         source: new VectorSource({
-          url: dataset,
-          format: new GeoJSON(),
+          features: new GeoJSON().readFeatures(dataset, {
+            featureProjection: 'EPSG:3857', // Ensure the projection matches your map
+          }),
         }),
       });
 

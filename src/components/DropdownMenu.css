@@ -9,7 +9,6 @@ select {
   cursor: pointer;
   text-align: center;
   align-items: center;
-  height: 4.5vh;
   margin-top: 0.2vh;
   width: 100%; /* Ensures the dropdown adjusts to available width */
   box-sizing: border-box; /* Includes padding and border in the width/height */

@@ -50,6 +50,16 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
 
   const [dataset, setDataset] = useState<string | undefined>(undefined);
 
+  const getGeoJSONUrl = (
+    coordinates: [number, number],
+    dataset: string | undefined
+  ) =>
+    `https://geojson.urban-ai.ch/${findLabelByValue(coordinates)
+      ?.toLowerCase()
+      .replace(/\s/g, "")}_${dataset}`;
+
+  const geoJSONUrl = getGeoJSONUrl(coordinates, dataset);
+
   return (
     <div className="tool-container">
       <div className="filter-menu">
@@ -69,21 +79,8 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
       </div>
 
       <>
-        {console.log(
-          "geojson_output/" +
-            findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, "") +
-            "_" +
-            dataset
-        )}
-        <MapComponent
-          coordinates={coordinates}
-          dataset={
-            "geojson_output/" +
-            findLabelByValue(coordinates)?.toLowerCase().replace(/\s/g, "") +
-            "_" +
-            dataset
-          }
-        />
+        {console.log(geoJSONUrl)}
+        <MapComponent coordinates={coordinates} dataset={geoJSONUrl} />
       </>
     </div>
   );

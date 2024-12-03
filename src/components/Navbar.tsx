@@ -60,6 +60,9 @@ export function Navbar() {
           <li>
             <Link to="/contact" onClick={closeMenu}>Contact</Link>
           </li>
+          <li className="navbar-tool-button">
+            <Link to="/tool" onClick={closeMenu}>Explore</Link>
+          </li>
         </ul>
       </div>
 

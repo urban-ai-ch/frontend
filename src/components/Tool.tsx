@@ -119,7 +119,6 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
         />
         <InputButton label="Input" to="/Input" variant="primary" />
       </div>
-
       <>
         <MapComponent coordinates={coordinates} dataset={geoJSON ?? ""} />
       </>

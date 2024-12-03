@@ -35,6 +35,33 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     return location?.value;
   };
 
+  // Geocoding is more complicated than I thought...
+
+  // const getCoordinatesByAddress = async () => {
+
+  //   try {
+  //     const response = await fetch(
+  //       `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`
+  //     );
+
+  //     const data = await response.json();
+  //     if (data.length > 2) {
+  //       const { lat, lon } = data[0];
+  //       setCoordinates([parseFloat(lon), parseFloat(lat)])
+  //     } else {
+  //       alert('Address not found!')
+  //     }
+  //   } catch (error) {
+  //     console.error('Error when trying to convert address to coords', error);
+  //   }
+  // }
+
+  // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (e.key === 'Enter') {
+  //     getCoordinatesByAddress();
+  //   }
+  // };
+
   const locationOptions: LocationOption[] = [
     { label: "Zurich", value: [8.5417, 47.3769] },
     { label: "Cape Town", value: [18.4241, -33.9249] },
@@ -55,6 +82,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
 
   const [dataset, setDataset] = useState<string | null>(null);
   const [geoJSON, setGeoJSON] = useState<GeoJSON | null>(null);
+  // const [address, setAddress] = useState<string>('');
 
   // Function to fetch GeoJSON data
   const fetchGeoJSON = async (
@@ -117,6 +145,13 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           onChange={(newDataset: string) => setDataset(newDataset)}
         />
         <InputButton label="Input" to="/Input" variant="primary" />
+        {/* <input
+          type="text"
+          placeholder="Enter address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          onKeyDown={handleKeyDown}
+        /> */}
       </div>
       <>
         <MapComponent coordinates={coordinates} dataset={geoJSON ?? undefined} />

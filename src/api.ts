@@ -1,7 +1,7 @@
 const API_URL = "https://api.urban-ai.ch";
 
 interface RequestOptions extends RequestInit {
-  body?: string;
+  body?: BodyInit;
 }
 
 type Status = "success" | "error";

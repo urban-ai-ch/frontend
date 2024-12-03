@@ -1,27 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Input.css";
 import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
 
-type ImagesResponse = {
+type ImageObject = {
   name: string;
   href: string;
-}[];
+};
 
 const ImageUploader: React.FC = () => {
+  const { logout } = useAuth();
   const [images, setImages] = useState<File[]>([]);
-  const [uploadedImages, setUploadedImages] = useState<ImagesResponse>([]);
+  const [uploadedImages, setUploadedImages] = useState<ImageObject[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // Fetch the list of uploaded images from the backend
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await apiRequest<ImagesResponse>(
+        const response = await apiRequest<ImageObject[]>(
           "/images/v1/images",
           {},
-          useAuth().logout
+          logout
         );
         if (response.status === "success" && response.data) {
           setUploadedImages(response.data);
@@ -58,36 +60,36 @@ const ImageUploader: React.FC = () => {
     images.forEach((image) => formData.append("image", image)); // Append each image to the FormData object
 
     try {
-      const uploadResponse = await apiRequest(
-        "/images/v1/image",
+      const uploadResponse = await apiRequest<ImageObject[]>(
+        "/images/v1/images",
         {
           method: "POST",
-          body: JSON.stringify(formData),
+          body: formData,
         },
-        useAuth().logout
+        logout
       );
 
-      if (uploadResponse.status === "success") {
+      console.log(uploadResponse);
+      if (uploadResponse.status === "success" && uploadResponse.data) {
         alert("Images uploaded successfully!");
         setImages([]);
         setPreviewUrls([]);
 
-        //TODO: dont pull but "calculate" the new uploadedImages locally
-        const imagesResponse = await apiRequest<ImagesResponse>(
-          "/images/v1/images",
-          {},
-          useAuth().logout
+        uploadResponse.data.forEach((imageObject) =>
+          uploadedImages.push(imageObject)
         );
-        if (imagesResponse.status === "success" && imagesResponse.data)
-          setUploadedImages(imagesResponse.data);
       } else {
-        alert("Failed to upload images.");
+        alert("Failed to upload image.");
       }
     } catch (error) {
       console.error("Upload error:", error);
       alert("An error occurred while uploading images.");
     } finally {
       setLoading(false);
+    }
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
     }
   };
 
@@ -98,6 +100,7 @@ const ImageUploader: React.FC = () => {
       {/* Upload Form */}
       <form className="upload-form" onSubmit={handleSubmit}>
         <input
+          ref={fileInputRef}
           type="file"
           accept="image/jpeg, image/png" // Accept both JPG and PNG images
           multiple

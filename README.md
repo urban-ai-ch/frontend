@@ -82,15 +82,7 @@ In the first couple of weeks, we have managed to get the core functionalities of
 
 ## Versioning
 
-Create stable versions of your code each week by using gitlab tags.\
-Take a look at [Gitlab Tags](https://docs.gitlab.com/ee/topics/git/tags.html) for more details.
-
-Then list here the weekly tags. \
-We will evaluate your code every week, based on the corresponding version.
-
 Tags:
 
-- Week 1: [Week 1 Tag](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/tags/stable-readme)
-- Week 2: ..
-- Week 3: ..
-- ...
+- Milestone 2: [Milestone 2 tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v0.1)
+

@@ -11,7 +11,6 @@ import Register from "./components/Register";
 import Contact from "./components/Contact";
 import Tool from "./components/Tool";
 import Input from "./components/Input";
-import Code from "./components/Code";
 import About from "./components/About";
 import HomePage from "./components/HomePage";
 import Profile from "./components/Profile";
@@ -26,7 +25,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/code" element={<Code />} />
           <Route path="/about" element={<About />} />
           <Route path="/input" element={<Input />} />
           <Route path="/profile" element={<Profile />} />

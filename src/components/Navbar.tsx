@@ -18,7 +18,7 @@ export function Navbar() {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
-  }
+  };
 
   // Handle user icon click
   // const handleUserIconClick = () => {
@@ -55,16 +55,22 @@ export function Navbar() {
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/about" onClick={closeMenu}>About</Link>
+            <Link to="/about" onClick={closeMenu}>
+              About
+            </Link>
           </li>
           <li>
-            <Link to="/code" onClick={closeMenu}>Code</Link>
-          </li>
-          <li>
-            <Link to="/contact" onClick={closeMenu}>Contact</Link>
+            <Link to="/contact" onClick={closeMenu}>
+              Contact
+            </Link>
           </li>
           <li className="navbar-tool-button">
-            <Link  to={auth.isAuthenticated ? "/tool" : "/login"} onClick={closeMenu}>Explore</Link>
+            <Link
+              to={auth.isAuthenticated ? "/tool" : "/login"}
+              onClick={closeMenu}
+            >
+              Explore
+            </Link>
           </li>
         </ul>
       </div>
@@ -74,7 +80,11 @@ export function Navbar() {
         {/* <Link to="/tool" className="explore-button">
           Explore
         </Link> */}
-        <ExploreButton label="Explore" to={auth.isAuthenticated ? "/tool" : "/login"} variant="primary" />
+        <ExploreButton
+          label="Explore"
+          to={auth.isAuthenticated ? "/tool" : "/login"}
+          variant="primary"
+        />
 
         {/* Hamburger Button */}
         <button className="hamburger" onClick={toggleMenu}>

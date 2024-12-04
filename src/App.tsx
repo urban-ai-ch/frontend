@@ -6,7 +6,7 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import Layout from "./Layout";
-import Login from "./components/login";
+import Login from "./components/Login";
 import Register from "./components/register";
 import Contact from "./components/contact";
 import Tool from "./components/Tool";

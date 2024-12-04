@@ -13,31 +13,26 @@ Through this web application, we provide a simple interface for both experts and
 
 Our project is two fold: on the one side, we provide an interactive map for users to visualise the existing curated datasets from 5 major cities. On the other, we aim to provide a tool for users to upload their own images, to gain insights into structures that personally interest them.
 
-### Users
+The main emphasis of our project is scalability. We want our application to be very easy to scale to be used in industry, allowing for batch uploads for city-wide insights.
 
-List your projects target Users.
+### Users
+The target users are people interesting in gaining architectural and civil engineering insights on a city-wide scale. This would include non-profits, governments, NGOs, data analysts... Our website must be useable for non tech-saavy users.
 
 ### Tasks
-
-Define all the tasks you want your dashboard solve.
+- Provide an interactive map to visualise the datasets
+- Provide a way of uploading your own images to obtain insights from the model, placing an emphasis on scalability
+- Authentication, as part of of scalability focus. This is important as well to initially block off access to external members as the paper has not been published yet.
+- Make the application responsive and easy to use on mobile. As our app accepts images, it only makes sense that it should be easy to upload photos directly with the camera.
+- Set rate limits for API requests (dataset fetching, image uploads)
+- Create a functional contact page, such that potential users can contact us for special demands or enquiries
 
 ---
 
 ## Requirements
 
-Write here all intructions to build the environment and run your code.\
-**NOTE:** If we cannot run your code following these requirements we will not be able to evaluate it.
-
 ## How to Run
 
-Write here **DETAILED** intructions on how to run your code.\
-**NOTE:** If we cannot run your code following these instructions we will not be able to evaluate it.
-
-As an example here are the instructions to run the Dummy Project:
-To run the Dummy project you have to:
-
-- clone the repository;
-- open a terminal instance and using the command `cd` move to the folder where the project has been downloaded;
+First clone the repository.
 
 To run the backend
 
@@ -48,12 +43,12 @@ To run the frontend
 
 - Open a new terminal window and go to the project folder
 - Enter the frontend folder called "react-frontend"
-- Do the following command to start the front end `npm install`, `npm start`
+- Paste the following command to start te front end `npm run build && npm run start`
   If all the steps have been successfully executed a new browser window witht he dummy project loaded will open automatically.
 
 ## Milestones
 
-- [ ] Page skeleton, implementation of core functionalities
+- [ ] Page skeleton, implementation of core functionalities (Milestone 2)
 
   - [x] Responsive navigation bar
   - [x] Create filter components (dropdown menu)
@@ -61,16 +56,17 @@ To run the frontend
   - [x] Login frontend
   - [x] Conversion of data from shapefiles to geojson
   - [x] First test of interactive, clickable map with data
-  - [ ] Backend fetching of correct geojson file
-  - [ ] Home page
+  - [x] Backend fetching of correct geojson file
+  - [x] Home page
   - [ ] About page
-  - [ ] Functional contact page
+  - [x] Functional contact page
 
-- [ ] Week 2
-  - [ ] Sub-task: [#2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/issues/2)
-  - [ ] Sub-task: ...
-  - [x] Completed Sub-task: [#20984ec2](https://gitlab.inf.ethz.ch/COURSE-XAI-IML22/dummy-fullstack/-/commit/20984ec2197fa8dcdc50f19723e5aa234b9588a3)
-  - [x] Completed Sub-task: ...
+- [ ] Processing of uploaded images, Google Maps StreetView API, accessibility, responsiveness (Milestone 3)
+  - [ ] Improve responsiveness
+  - [ ] Make dataset points clickable to display properties
+  - [ ] Improve map performance with large datasets
+  - [ ] Google Dynamic StreetView API for easy image uploads
+  - [ ] Add animations to homepage
 
 Create a list subtask.\
 Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
@@ -82,8 +78,7 @@ This will help you have a clearer overview of what you are currently doing, trac
 
 ## Weekly Summary
 
-Write here a short summary with weekly progress, including challanges and open questions.\
-We will use this to understand what your struggles and where did the weekly effort go to.
+In the first couple of weeks, we have managed to get the core functionalities of the application working. The interactive map, the fetching of datasets, deployment, authentication, home page, contact page are all complete.
 
 ## Versioning
 

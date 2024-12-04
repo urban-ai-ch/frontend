@@ -7,14 +7,14 @@ import {
 } from "react-router-dom";
 import Layout from "./Layout";
 import Login from "./components/Login";
-import Register from "./components/register";
-import Contact from "./components/contact";
+import Register from "./components/Register";
+import Contact from "./components/Contact";
 import Tool from "./components/Tool";
 import Input from "./components/Input";
-import Code from "./components/code";
-import About from "./components/about";
+import Code from "./components/Code";
+import About from "./components/About";
 import HomePage from "./components/HomePage";
-import Profile from "./components/profile";
+import Profile from "./components/Profile";
 import { useAuth } from "./AuthContext";
 
 function App() {

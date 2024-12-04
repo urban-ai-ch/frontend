@@ -1,5 +1,5 @@
 import React from "react";
-import "./about.css";
+import "./About.css";
 import Sai from "../img/266.webp";
 import Noah from "../img/266.webp";
 import Patrick from "../img/266.webp";

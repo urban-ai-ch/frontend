@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./profile.css";
+import "./Profile.css";
 import { useAuth } from "../AuthContext";
 import { apiRequest } from "../api";
 

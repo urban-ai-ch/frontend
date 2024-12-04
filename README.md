@@ -72,14 +72,6 @@ You may f the username 'test' and password 'test'. Please do not share these cre
   - [ ] Google Dynamic StreetView API for easy image uploads
   - [ ] Add animations to homepage
 
-Create a list subtask.\
-Open an issue for each subtask. Once you create a subtask, link the corresponding issue.\
-Create a merge request (with corresponding branch) from each issue.\
-Finally accept the merge request once issue is resolved. Once you complete a task, link the corresponding merge commit.\
-Take a look at [Issues and Branches](https://www.youtube.com/watch?v=DSuSBuVYpys) for more details.
-
-This will help you have a clearer overview of what you are currently doing, track your progress and organise your work among yourselves. Moreover it gives us more insights on your progress.
-
 ## Weekly Summary
 
 In the first couple of weeks, we have managed to get the core functionalities of the application working. The interactive map, the fetching of datasets, deployment, authentication, home page, contact page are all complete.

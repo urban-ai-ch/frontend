@@ -7,10 +7,11 @@ body {
 
 .profile-container {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   justify-content: center;
   align-items: center;
   height: 100vh;
-
   margin: auto;
   padding: 20px;
 }
@@ -23,6 +24,8 @@ body {
   width: 80vw;
   overflow: hidden;
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .profile-header {

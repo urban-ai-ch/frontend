@@ -46,6 +46,10 @@ To run the frontend
 - Paste the following command to start te front end `npm run build && npm run start`
   If all the steps have been successfully executed a new browser window witht he dummy project loaded will open automatically.
 
+You will be prompted to login. The register page is locked for now as we do not wish to make the data public (due to the unpublished nature of the paper).
+
+You may f the username 'test' and password 'test'. Please do not share these credentials.
+
 ## Milestones
 
 - [ ] Page skeleton, implementation of core functionalities (Milestone 2)

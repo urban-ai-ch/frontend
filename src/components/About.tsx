@@ -1,9 +1,9 @@
 import React from "react";
 import "./About.css";
-import Sai from "../img/266.webp";
-import Noah from "../img/266.webp";
-import Patrick from "../img/266.webp";
-import Eren from "../img/266.webp";
+import Sai from "../img/programmer-svgrepo-com.svg";
+import Noah from "../img/programmer-svgrepo-com.svg";
+import Patrick from "../img/programmer-svgrepo-com.svg";
+import Eren from "../img/programmer-svgrepo-com.svg";
 
 interface TeamMember {
   image: string; // URL for the member's picture

@@ -56,7 +56,7 @@ export function Navbar() {
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
             <Link to="/about" onClick={closeMenu}>
-              About
+              About us
             </Link>
           </li>
           <li>

@@ -14,6 +14,7 @@ import Input from "./components/Input";
 import Code from "./components/code";
 import About from "./components/about";
 import HomePage from "./components/HomePage";
+import Profile from "./components/profile";
 import { useAuth } from "./AuthContext";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/code" element={<Code />} />
           <Route path="/about" element={<About />} />
           <Route path="/input" element={<Input />} />
+          <Route path="/profile" element={<Profile />} />
           {isAuthenticated ? (
             <Route path="/tool" element={<ToolPage />} />
           ) : (

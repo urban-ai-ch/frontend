@@ -17,10 +17,10 @@
 /* flex-basis: 40% - The initial size of the item is set to 50% of the container's main size. */
 .small-image-with-text .image {
   flex: 0 1 40%; 
-  max-width: 20rem;
+  max-width: 18rem;
   min-width: 12rem;
   height: auto;
-  max-height: 20rem;
+  max-height: 17rem;
   object-fit: cover;
   border-radius: 10px;
   order: 1;

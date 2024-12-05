@@ -21,13 +21,14 @@ const TeamPage: React.FC = () => {
       image: Sai,
       name: "Sai",
       description: "Frontend Developer",
+      url: "https://www.linkedin.com/in/saimaneesh-yeturu-ba3998292/",
     },
     {
       image: Noah,
       name: "Noah",
       description:
         "Backend Developer <br> <br> Meet Noah the ultimate charmer who seems to have mastered the universal language of wit and confidence. Whether it’s the barista brewing his coffee, the elderly neighbor tending her roses, or the group of friends at the next table, he’s got a knack for making everyone feel special. With a mischievous grin, a pocket full of clever compliments, and the uncanny ability to leave anyone smiling, Noah isn’t bound by age or circumstance. He’s not just smooth—he’s a walking rom-com, spreading warmth, laughter, and maybe just a little blush wherever he goes.",
-      url: "https://gerberservices.com",
+      url: "https://gerberservices.com/",
     },
     {
       image: Patrick,
@@ -38,6 +39,7 @@ const TeamPage: React.FC = () => {
       image: Eren,
       name: "Eren",
       description: "Project Manager",
+      url: "https://www.linkedin.com/in/eren-homburg-8abba12bb/",
     },
   ];
 

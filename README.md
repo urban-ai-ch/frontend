@@ -11,7 +11,7 @@
 
 Through this web application, we provide a simple interface for both experts and casual users to interact with URBAN-AI, an AI that offers meaningful architectural and civil engineering insights from simple images of buildings.
 
-Our project is two fold: on the one side, we provide an interactive map for users to visualise the existing curated datasets from 5 major cities. On the other, we aim to provide a tool for users to upload their own images, to gain insights into structures that personally interest them.
+Our project is two fold: on the one side, we provide an interactive map for users to visualise the existing curated datasets from 6 major cities. On the other, we aim to provide a tool for users to upload their own images, to gain insights into structures that personally interest them.
 
 The main emphasis of our project is scalability. We want our application to be very easy to scale to be used in industry, allowing for batch uploads for city-wide insights.
 
@@ -70,7 +70,9 @@ You may f the username 'test' and password 'test'. Please do not share these cre
   - [ ] Make dataset points clickable to display properties
   - [ ] Improve map performance with large datasets
   - [ ] Google Dynamic StreetView API for easy image uploads
-  - [ ] Add animations to homepage
+  - [ ] Add animations and updated design to homepage
+  - [ ] Apply more consisent design layout, maybe light & dark mode
+  - [ ] apply some accessibility
 
 ## Weekly Summary
 

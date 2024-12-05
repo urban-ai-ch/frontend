@@ -9,6 +9,7 @@ interface TeamMember {
   image: string; // URL for the member's picture
   name: string; // Name of the team member
   description: string; // Description for the team member
+  url?: string;
 }
 
 const TeamPage: React.FC = () => {
@@ -26,6 +27,7 @@ const TeamPage: React.FC = () => {
       name: "Noah",
       description:
         "Backend Developer <br> <br> Meet Noah the ultimate charmer who seems to have mastered the universal language of wit and confidence. Whether it’s the barista brewing his coffee, the elderly neighbor tending her roses, or the group of friends at the next table, he’s got a knack for making everyone feel special. With a mischievous grin, a pocket full of clever compliments, and the uncanny ability to leave anyone smiling, Noah isn’t bound by age or circumstance. He’s not just smooth—he’s a walking rom-com, spreading warmth, laughter, and maybe just a little blush wherever he goes.",
+      url: "https://gerberservices.com",
     },
     {
       image: Patrick,
@@ -51,7 +53,15 @@ const TeamPage: React.FC = () => {
               alt={`${member.name}'s profile`}
               className="team-member-image"
             />
-            <h2 className="team-member-name">{member.name}</h2>
+            <h2 className="team-member-name">
+              {member.url ? (
+                <a href={member.url} target="blank">
+                  {member.name}
+                </a>
+              ) : (
+                member.name
+              )}
+            </h2>
             <div
               className="team-member-description"
               dangerouslySetInnerHTML={{ __html: member.description }}

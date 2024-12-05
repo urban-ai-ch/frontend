@@ -81,9 +81,9 @@
     grid-template-columns: repeat(2, 1fr); /* Show two columns on tablets */
   }
 
-  .team-member {
-    /* padding: 15px; */ /* Reduce padding for smaller cards */
-  }
+ /*  .team-member {
+    padding: 15px; 
+  } */
 
   .team-member-image {
     width: 6em;
@@ -116,6 +116,6 @@
 
   .team-member-description {
     font-size: 1rem;
-    padding: 5px;
+    padding: 5px 0;
   }
 }

@@ -75,8 +75,36 @@ You may f the username 'test' and password 'test'. Please do not share these cre
   - [ ] Respect some accessibilities
 
 ## Weekly Summary
+For a clearer overview of our achievements, we present our summary as a list of implemented features.
 
-In the first couple of weeks, we have managed to get the core functionalities of the application working. The interactive map, the fetching of datasets, deployment, authentication, home page, contact page are all complete.
+### Backend
+
+#### Authentication
+We implemented our own authentication, consisting of jwt signing and verification aswell as hashing.
+
+#### Data-Storage
+We use a KV-Storage for user related data, running on Cloudflares Edge.For larger data like images and geojson data we user an R2-Object-Storage.
+
+#### Data Security
+We moved the R2-Bucket with our geojson data from a public subdomain to an endpoint behind our Worker, to prevent data leaks of the raw geojson data.
+
+#### Image Upload
+The image endpoint leverages file streaming to ensure a fast upload of multiple images to its dedicated R2-Bucket.
+
+#### Resource Caching
+To minimize request fees of the R2-Object-Storage, we decided to implement a caching.This caching consists of the standard browser cache, aswell as the Cloudflare edge cache.
+
+#### Rate Limiting
+Another mechanism, we leverage to minimize request fees, is ratelimiting. We ratelimit specific endpoints to prevent abusive behavior.
+
+#### Mail Service
+We have an email endpoint that redirects requests from our contact form to our private email accounts. The form submissions are processed and sent from our project domain email `backend@urban-ai.ch'.
+
+#### Cross Origin Resource Sharing
+Since our backend is deployed on a different subdomain than our frontend, we implemented Cross-Origin Resource Sharing (CORS), which involves modifying response headers and handling preflight OPTIONS requests.
+
+#### Cloudflare Features
+We deployed a variety of Cloudflare Features ranging from DDOS-Protection, bot detection or load time optimization to analytics and logs.
 
 ## Versioning
 

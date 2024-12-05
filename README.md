@@ -71,8 +71,8 @@ You may f the username 'test' and password 'test'. Please do not share these cre
   - [ ] Improve map performance with large datasets
   - [ ] Google Dynamic StreetView API for easy image uploads
   - [ ] Add animations and updated design to homepage
-  - [ ] Apply more consisent design layout, maybe light & dark mode
-  - [ ] apply some accessibility
+  - [ ] More consisent design layout, maybe light & dark mode
+  - [ ] Respect some accessibilities
 
 ## Weekly Summary
 

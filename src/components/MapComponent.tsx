@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { Map, View } from "ol";
+import { useEffect, useRef, useState } from "react";
+import { Map, Overlay, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
@@ -18,6 +18,9 @@ export function MapComponent({
 }) {
   const mapRef = useRef<Map | null>(null);
   const vectorSourceRef = useRef<VectorSource | null>(null);
+
+  const popupRef = useRef<HTMLDivElement | null>(null);
+  const [popupText, setPopupText] = useState<string>("");
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -43,22 +46,25 @@ export function MapComponent({
         }),
       });
 
+      const popupOverlay = new Overlay({
+        element: popupRef.current!,
+        positioning: "bottom-center",
+        stopEvent: false,
+      });
+
+      mapRef.current.addOverlay(popupOverlay);
+
       // Add click event listener to get feature properties
-      // mapRef.current.on("singleclick", (event) => {
-
-      //   mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
-      //   const properties = feature.getProperties();
-
-      //   // const popup = new Overlay({
-      //   //   element: document.getElementById('popup'),
-      //   // });
-      //   // mapRef.addOverlay(popup);
-
-
-      //   console.log(properties);
-      //   });
-
-      // });
+      mapRef.current.on("singleclick", (event) => {
+        mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
+          const properties = feature.getProperties();
+          setPopupText(
+            `Architecture: ${properties["architectu"]}\nMaterial: ${properties["material"]}\nbuilding_c: ${properties["building_c"]}`
+          );
+          const c = event.coordinate;
+          popupOverlay.setPosition(c);
+        });
+      });
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
@@ -66,14 +72,16 @@ export function MapComponent({
     }
   }, [coordinates]);
 
-
   useEffect(() => {
     if (dataset) {
-      const datasetLayer = new VectorLayer({
+      const geojsonFormat = new GeoJSON();
+      const features = geojsonFormat.readFeatures(dataset, {
+        featureProjection: "EPSG:3857",
+      });
+
+      var datasetLayer = new VectorLayer({
         source: new VectorSource({
-          features: new GeoJSON().readFeatures(dataset, {
-            featureProjection: 'EPSG:3857', // Ensure the projection matches your map
-          }),
+          features: features,
         }),
       });
 
@@ -84,8 +92,18 @@ export function MapComponent({
         mapRef.current?.removeLayer(datasetLayer);
       };
     }
-    return () => { };
+    return () => {};
   }, [dataset]);
 
-  return <div id="map" className="map-container" />;
+  return (
+    <div>
+      <div id="map" className="map-container" />
+      <div
+        className="popup"
+        ref={popupRef}>
+        <div className="popup-title">Properties</div>
+        <div className="popup-content">{popupText}</div>
+      </div>
+    </div>
+  );
 }

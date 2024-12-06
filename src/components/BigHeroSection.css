@@ -3,6 +3,7 @@
   width: 100%;
   height: 35rem; /* Adjust height as needed */
   overflow: hidden;
+  margin-bottom: 1rem;
 }
 
 .hero-image {
@@ -54,16 +55,22 @@
 }
 
 
-/* Responsive Adjustments */
-@media (max-width: 1500px) {
+/* for Tablets */
+@media (max-width: 1200px) {
+  .big-hero-section {
+    margin-bottom: 1rem;
+  }
+
   .hero-content {
     max-width: 60%; /* Allow content to use more width */
   }
 }
 
-@media (max-width: 835px) {
+/* for Phones */
+@media (max-width: 768px) {
   .big-hero-section {
     height: 25rem; /* Reduce height on smaller screens */
+    margin-bottom: 1rem;
   }
 
   .hero-content {

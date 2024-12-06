@@ -19,7 +19,7 @@ const SmallImageWithText: React.FC<SmallImageWithTextProps> = ({
       <img src={imageSrc} alt={title} className="image" />
       <div className="text-content">
         {/* <h2>{title}</h2> */}
-        <h3>{description}</h3>
+        <p>{description}</p>
       </div>
     </div>
   );

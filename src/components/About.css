@@ -1,0 +1,121 @@
+.team-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: auto;
+  padding: 20px;
+  max-width: 55em; /* Limit the width of the page */
+
+}
+.team-name {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.team-description {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  /* color: #555; */
+}
+
+.team-members {
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  */
+  grid-template-columns: repeat(2, 1fr); /* Show two columns on tablets */
+
+  gap: 2.5rem; /* spacing between member */
+
+}
+
+.team-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* padding: 20px; */
+  /* background-color: darkgrey;  */
+  /* border-radius: 10px; */
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease;  */
+}
+
+/* Hover Effects */
+.team-member:hover {
+  transform: translateY(-5px); /* Slight lift on hover */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.team-member-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 3px solid darkgrey; 
+}
+
+.team-member-name {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* color: #333; */
+}
+
+.team-member-description {
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 10px;
+  /* color: #666; */
+  line-height: 1.4;
+}
+
+
+
+/* Tablet-Specific Media Query (768px - 1024px) */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .team-container {
+    gap: 1.5rem; /* Reduce gaps for tighter spacing */
+  }
+
+  .team-members {
+    grid-template-columns: repeat(2, 1fr); /* Show two columns on tablets */
+  }
+
+ /*  .team-member {
+    padding: 15px; 
+  } */
+
+  .team-member-image {
+    width: 6em;
+    height: 6em; 
+  }
+
+  .team-member-description {
+    font-size: 1rem;
+    padding: 5px;
+  }
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+  .team-name {
+    margin-bottom: 0px;
+  }
+  .team-members {
+    grid-template-columns: 1fr; /* Stack team members vertically */
+  }
+
+  .team-member {
+    padding: 10px; /* Reduce padding for smaller cards */
+  }
+
+  .team-member-image {
+    width: 5em;
+    height: 5em; 
+  }
+
+  .team-member-description {
+    font-size: 1rem;
+    padding: 5px 0;
+  }
+}

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./contact.css";
+import "./Contact.css";
 import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
+
+type MailPayload = {
+  subject: string;
+  message: string;
+};
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -11,6 +16,7 @@ export default function Contact() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,17 +26,21 @@ export default function Contact() {
       return;
     }
 
+    const payload: MailPayload = {
+      message: message,
+      subject: `Contact request - ${name} - ${email}`,
+    };
     try {
       const response = await apiRequest<never>(
-        "/contact/v1",
+        "/mail/v1/broadcast",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ name, email, message }),
+          body: JSON.stringify(payload),
         },
-        useAuth().logout
+        logout
       );
 
       if (response.status === "success") {
@@ -44,6 +54,7 @@ export default function Contact() {
         setError("Failed to send your message. Please try again.");
       }
     } catch (err) {
+      console.log(err);
       setError("An error occurred. Please try again later.");
     }
   };

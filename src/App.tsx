@@ -6,14 +6,14 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import Layout from "./Layout";
-import Login from "./components/login";
-import Register from "./components/register";
-import Contact from "./components/contact";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Contact from "./components/Contact";
 import Tool from "./components/Tool";
 import Input from "./components/Input";
-import Code from "./components/code";
-import About from "./components/about";
+import About from "./components/About";
 import HomePage from "./components/HomePage";
+import Profile from "./components/Profile";
 import { useAuth } from "./AuthContext";
 
 function App() {
@@ -25,9 +25,9 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/code" element={<Code />} />
           <Route path="/about" element={<About />} />
           <Route path="/input" element={<Input />} />
+          <Route path="/profile" element={<Profile />} />
           {isAuthenticated ? (
             <Route path="/tool" element={<ToolPage />} />
           ) : (

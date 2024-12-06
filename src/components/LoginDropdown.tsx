@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import './LoginDropdown.css';
-import { useAuth } from '../AuthContext';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import "./LoginDropdown.css";
+import { useAuth } from "../AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+//import { link } from "fs";
 
 const LoginDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,16 +15,19 @@ const LoginDropdown: React.FC = () => {
 
   const handleLogInOut = () => {
     setIsOpen(false);
-    if (!auth.isAuthenticated) navigate('/login');
+    if (!auth.isAuthenticated) navigate("/login");
     else {
-        auth.logout();
-        navigate('/')
+      auth.logout();
+      navigate("/");
     }
   };
 
   const handleProfile = () => {
     setIsOpen(false);
-    console.log('Profile clicked'); // TODO: Add profile page here
+    if (auth.isAuthenticated) navigate("/profile");
+    else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -37,7 +41,7 @@ const LoginDropdown: React.FC = () => {
             Profile
           </button>
           <button onClick={handleLogInOut} className="dropdown-item">
-            {auth.isAuthenticated ? 'Logout' : 'Login'}
+            {auth.isAuthenticated ? "Logout" : "Login"}
           </button>
         </div>
       )}

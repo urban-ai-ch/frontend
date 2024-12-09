@@ -9,7 +9,7 @@
   text-align: center;
   align-items: center;
   text-decoration: none;
-  height: 4.4vh;
+  height: 65px;
   width: 140px;
   margin-top: 0.1vh;
 }
@@ -31,10 +31,4 @@
 
 .input-button.secondary:hover {
   background-color: #e2e6ea;
-}
-
-@media (max-height: 628px) {
-  .input-button {
-    height: 33px;
-  }
 }

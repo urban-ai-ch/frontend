@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Image, Map, Overlay, View } from "ol";
+import { Map, Overlay, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";

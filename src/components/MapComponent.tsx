@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Map, Overlay, View } from "ol";
+import { Image, Map, Overlay, View } from "ol";
 import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
@@ -8,6 +8,7 @@ import { fromLonLat } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
+// import { apiRequest } from "../api";
 
 export function MapComponent({
   coordinates,
@@ -20,7 +21,38 @@ export function MapComponent({
   const vectorSourceRef = useRef<VectorSource | null>(null);
 
   const popupRef = useRef<HTMLDivElement | null>(null);
-  const [popupText, setPopupText] = useState<string>("");
+  const [popupText, setPopupText] = useState<JSX.Element[]>([]);
+
+  const DISPLAY_PROPERTIES = [
+    "architectu",
+    "heritage_s",
+    "material",
+    "building_c",
+    "main_facad",
+    "roof",
+    "energy_fea",
+    "energy_ass",
+    "gutters",
+    "building_t",
+    "pre_domain",
+    "ART",
+    "ARTZH",
+    "BEARBEITUN",
+    "BFSNR",
+    "EGID",
+    "GBAUJ",
+    "GBAUP",
+    "GVZNUMMER",
+    "QUALITAET",
+    "STICHTAG",
+    "build_year",
+    "floors",
+    "height",
+    "latitude",
+    "longitude",
+    "area_in_me",
+    "SHAPE_Area"
+  ];
 
   useEffect(() => {
     if (!mapRef.current) {
@@ -56,11 +88,36 @@ export function MapComponent({
 
       // Add click event listener to get feature properties
       mapRef.current.on("singleclick", (event) => {
-        mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
+        mapRef.current?.forEachFeatureAtPixel(event.pixel, async (feature) => {
           const properties = feature.getProperties();
-          setPopupText(
-            `Architecture: ${properties["architectu"]}\nMaterial: ${properties["material"]}\nbuilding_c: ${properties["building_c"]}`
-          );
+
+          console.log(properties);
+
+          if (properties) {
+            const filteredProperties = Object.entries(properties)
+              .filter(([key]) => DISPLAY_PROPERTIES.includes(key))
+              .map(([key, value], index) => (
+                <div key={index} className="ol-popup-row">
+                  <strong>{key.replace(/_/g, " ").toUpperCase()}:</strong>{" "}
+                  {value}
+                </div>
+              ));
+            setPopupText(filteredProperties);
+
+            if (properties['Filename']) {
+              // const response = await apiRequest<Image>(
+              //   `/images/v1/image/${properties['Filename']}`,
+              //   {
+              //     method: "GET",
+              //     headers: {
+              //       "Content-Type": "application/json",
+              //     },
+              //     body: JSON.stringify(payload),
+              //   },
+              //   logout
+              // );
+            }
+          }
           const c = event.coordinate;
           popupOverlay.setPosition(c);
         });
@@ -98,9 +155,7 @@ export function MapComponent({
   return (
     <div>
       <div id="map" className="map-container" />
-      <div
-        className="popup"
-        ref={popupRef}>
+      <div className="popup" ref={popupRef}>
         <div className="popup-title">Properties</div>
         <div className="popup-content">{popupText}</div>
       </div>

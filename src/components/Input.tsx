@@ -74,8 +74,8 @@ const ImageUploader: React.FC = () => {
         setImages([]);
         setPreviewUrls([]);
 
-        const images: ImageObject[] = uploadResponse.data;
-        setUploadedImages((prevImages) => [...prevImages, ...images]); // Create a new array
+        const newImages: ImageObject[] = uploadResponse.data;
+        setUploadedImages((prevImages) => [...prevImages, ...newImages]); // Create a new array
       } else {
         alert("Failed to upload image.");
       }
@@ -105,7 +105,7 @@ const ImageUploader: React.FC = () => {
           onChange={handleFileChange}
         />
         <br />
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading || images.length === 0}>
           {loading ? "Uploading..." : "Upload Images"}
         </button>
       </form>

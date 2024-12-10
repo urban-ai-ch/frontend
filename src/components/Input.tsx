@@ -69,15 +69,13 @@ const ImageUploader: React.FC = () => {
         logout
       );
 
-      console.log(uploadResponse);
       if (uploadResponse.status === "success" && uploadResponse.data) {
         alert("Images uploaded successfully!");
         setImages([]);
         setPreviewUrls([]);
 
-        uploadResponse.data.forEach((imageObject) =>
-          uploadedImages.push(imageObject)
-        );
+        const images: ImageObject[] = uploadResponse.data;
+        setUploadedImages((prevImages) => [...prevImages, ...images]); // Create a new array
       } else {
         alert("Failed to upload image.");
       }

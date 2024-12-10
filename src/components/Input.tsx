@@ -129,13 +129,15 @@ const ImageUploader: React.FC = () => {
       <div className="uploaded-images-section">
         <h3>Uploaded Images</h3>
         <ul className="uploaded-images-list">
-          {uploadedImages.map((image) => (
-            <li key={image.name}>
-              <a href={image.href} target="_blank" rel="noopener noreferrer">
-                {image.name}
-              </a>
-            </li>
-          ))}
+          {uploadedImages
+            .filter((a) => a && a.name && a.href)
+            .map((image) => (
+              <li key={image.name}>
+                <a href={image.href} target="_blank" rel="noopener noreferrer">
+                  {image.name}
+                </a>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

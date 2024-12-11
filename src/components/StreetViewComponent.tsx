@@ -10,7 +10,8 @@ interface StreetViewProps {
 const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyC-sEXK5ybaOtt-4PezxrpHsjVvgjRIafE",
+    googleMapsApiKey: import.meta.env["MAPS_API_KEY"]
+    ,
   });
 
   const panoramaRef = useRef<HTMLDivElement | null>(null);

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
 import InputButton from "./InputButton";
+import LegendStyle from "./LegendStyle"; // Import the Legend
 
 import "./Tool.css";
 import { apiRequest } from "../api";
@@ -169,6 +170,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           onChange={(e) => setAddress(e.target.value)}
           onKeyDown={handleKeyDown}
         /> */}
+        <LegendStyle /> {/* Add the LegendStyle component here */}
       </div>
       {showStreetView && streetViewLocation ? (
         <div className="super-container">

@@ -10,7 +10,6 @@ import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 // import { apiRequest } from "../api";
 import { createFeatureStyle } from "./MapStyles";
-// import LegendStyle from "./LegendStyle";
 
 
 export function MapComponent({
@@ -197,7 +196,6 @@ export function MapComponent({
   return (
     <div>
       <div id="map" className="map-container" />
-      {/* <LegendStyle /> Add the legend here */}
       <div className="popup" ref={popupRef}>
         <div className="popup-title">Properties</div>
         <div className="popup-content">{popupText}</div>

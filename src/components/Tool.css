@@ -5,5 +5,23 @@
 .filter-menu {
     display: flex;
     flex-wrap: nowrap; 
-    gap: 10px;  
+    gap: 15px;  
+    align-items: flex-start;
+    padding-bottom: 10px;
+    /* background-color: #f9f9f9; */
+}
+
+.filter-menu .input-button {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+  
+.filter-menu .input-button:hover {
+    transform: scale(1.05); 
+}
+  
+
+/* Position the legend in the filter-menu */
+.filter-menu .legend {
+    max-width: 450px; /* Optional: Limit legend width */
 }

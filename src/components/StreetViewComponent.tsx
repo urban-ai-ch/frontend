@@ -29,11 +29,20 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
           pitch: 0,
         },
         visible: true,
+        panControl: false,
+        linksControl: false, 
+        fullscreenControl: false, 
       });
 
-      // Optional: Add event listener for when the panorama is loaded
+
       google.maps.event.addListener(streetViewPanorama, 'pano_changed', () => {
         console.log('New Panorama Pano ID:', streetViewPanorama.getPano());
+      });
+
+
+      google.maps.event.addListener(streetViewPanorama, 'status_changed', () => {
+        const status = streetViewPanorama.getStatus();
+        console.log('Panorama status:', status);
       });
 
       // Optional: Return cleanup function to remove event listener and street view when component unmounts

@@ -148,12 +148,14 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           options={locationOptions}
           placeholder="Choose a city..."
           onChange={(newCoords: [number, number]) => setCoordinates(newCoords)}
+          enabled={showStreetView}
         />
         <DropdownMenu
           name="dataset"
           options={datasetOptions}
           placeholder="Choose a dataset..."
           onChange={(newDataset: string) => setDataset(newDataset)}
+          enabled={showStreetView}
         />
         <InputButton label="Input" to="/Input" variant="primary" />
         {/* <input

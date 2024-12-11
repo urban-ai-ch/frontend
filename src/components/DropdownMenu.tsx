@@ -5,11 +5,13 @@ export function DropdownMenu({
   options,
   placeholder,
   onChange,
+  enabled,
 }: {
   name: string;
   options: { label: string; value: any }[];
   placeholder: string;
   onChange: (value: any) => void;
+  enabled: boolean
 }) {
   
   // Assume that the placeholder is the default value when nothing is selected
@@ -25,6 +27,7 @@ export function DropdownMenu({
   return (
     <div>
       <select
+        disabled={enabled}
         id={name}
         name={name}
         onChange={handleChange}

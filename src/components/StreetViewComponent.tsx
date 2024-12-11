@@ -10,8 +10,7 @@ interface StreetViewProps {
 const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: import.meta.env["MAPS_API_KEY"]
-    ,
+    googleMapsApiKey: import.meta.env["VITE_MAPS_API_KEY"],
   });
 
   const panoramaRef = useRef<HTMLDivElement | null>(null);
@@ -64,11 +63,11 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   }, [isLoaded, center]);
 
   return isLoaded ? (
-      hasPanorama ? (
-        <div ref={panoramaRef} className="map-container"></div>
-      ) : (
-        <div>No Street View available at this location.</div>
-      )
+    hasPanorama ? (
+      <div ref={panoramaRef} className="map-container"></div>
+    ) : (
+      <div>No Street View available at this location.</div>
+    )
   ) : (
     <div>Loading...</div>
   );

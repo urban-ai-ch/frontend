@@ -32,7 +32,6 @@
   font-size: 12px;
   color: #333333;
   white-space: nowrap;
-  pointer-events: none;
   transform: translate(-50%, -100%);
   z-index: 2000;
 }

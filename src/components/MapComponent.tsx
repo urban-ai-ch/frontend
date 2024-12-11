@@ -4,18 +4,23 @@ import TileLayer from "ol/layer/Tile";
 import OSM from "ol/source/OSM";
 import "ol/ol.css";
 import "./MapComponent.css";
-import { fromLonLat } from "ol/proj";
+import { fromLonLat, transform } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 // import { apiRequest } from "../api";
 
+
+
 export function MapComponent({
   coordinates,
   dataset,
+  onStreetView,
 }: {
   coordinates: [number, number];
   dataset: GeoJSON | undefined;
+  onStreetView: (location: [number, number]) => void;
+
 }) {
   const mapRef = useRef<Map | null>(null);
   const vectorSourceRef = useRef<VectorSource | null>(null);
@@ -51,9 +56,10 @@ export function MapComponent({
     "latitude",
     "longitude",
     "area_in_me",
-    "SHAPE_Area"
+    "SHAPE_Area",
   ];
 
+  // Display map
   useEffect(() => {
     if (!mapRef.current) {
       // Create a vector source for markers
@@ -78,50 +84,6 @@ export function MapComponent({
         }),
       });
 
-      const popupOverlay = new Overlay({
-        element: popupRef.current!,
-        positioning: "bottom-center",
-        stopEvent: false,
-      });
-
-      mapRef.current.addOverlay(popupOverlay);
-
-      // Add click event listener to get feature properties
-      mapRef.current.on("singleclick", (event) => {
-        mapRef.current?.forEachFeatureAtPixel(event.pixel, async (feature) => {
-          const properties = feature.getProperties();
-
-          console.log(properties);
-
-          if (properties) {
-            const filteredProperties = Object.entries(properties)
-              .filter(([key]) => DISPLAY_PROPERTIES.includes(key))
-              .map(([key, value], index) => (
-                <div key={index} className="ol-popup-row">
-                  <strong>{key.replace(/_/g, " ").toUpperCase()}:</strong>{" "}
-                  {value}
-                </div>
-              ));
-            setPopupText(filteredProperties);
-
-            if (properties['Filename']) {
-              // const response = await apiRequest<Image>(
-              //   `/images/v1/image/${properties['Filename']}`,
-              //   {
-              //     method: "GET",
-              //     headers: {
-              //       "Content-Type": "application/json",
-              //     },
-              //     body: JSON.stringify(payload),
-              //   },
-              //   logout
-              // );
-            }
-          }
-          const c = event.coordinate;
-          popupOverlay.setPosition(c);
-        });
-      });
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
@@ -129,6 +91,62 @@ export function MapComponent({
     }
   }, [coordinates]);
 
+  // Handle clicks on the map
+  useEffect(() => {
+    if (popupRef.current && mapRef.current) {
+      const popupOverlay = new Overlay({
+        element: popupRef.current,
+        positioning: "bottom-center",
+        stopEvent: true,
+      });
+
+      mapRef.current.addOverlay(popupOverlay);
+
+      mapRef.current.on("singleclick", (event) => {
+        let featureFound = false;
+
+        mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
+          featureFound = true;
+          const properties = feature.getProperties();
+
+          if (properties) {
+            const filteredProperties = Object.entries(properties)
+              .filter(([key]) => DISPLAY_PROPERTIES.includes(key))
+              .map(([key, value], index) => (
+                <div key={index} className="popup-row">
+                  <strong>{key.replace(/_/g, " ").toUpperCase()}:</strong>{" "}
+                  {value}
+                </div>
+              ));
+
+            setPopupText(filteredProperties);
+          }
+          popupOverlay.setPosition(event.coordinate);
+        });
+
+        if (!featureFound) {
+          const c = event.coordinate;
+          const [lat, lon] = transform(c, 'EPSG:3857', 'EPSG:4326');
+          setPopupText([
+            <div key="no-data" className="popup-row">
+              <strong>Notice:</strong> No data available for this location.
+              Would you like to access Google Maps StreetView?
+            </div>,
+            <button
+              key="google-maps-button"
+              className="Google-Maps-button"
+              onClick={() => onStreetView([lon ?? 0, lat ?? 0])}
+            >
+              Access Google Maps
+            </button>,
+          ]);
+          popupOverlay.setPosition(event.coordinate);
+        }
+      });
+    }
+  }, [popupRef]);
+
+  // Display datasets
   useEffect(() => {
     if (dataset) {
       const geojsonFormat = new GeoJSON();

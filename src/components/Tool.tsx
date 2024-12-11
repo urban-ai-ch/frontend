@@ -7,9 +7,20 @@ import "./Tool.css";
 import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
 import GeoJSON from "ol/format/GeoJSON";
+import StreetViewComponent from "./StreetViewComponent";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   const { logout } = useAuth();
+
+  const [showStreetView, setShowStreetView] = useState(false);
+  const [streetViewLocation, setStreetViewLocation] = useState<
+    [number, number] | null
+  >(null);
+
+  const handleStreetView = (location: [number, number]) => {
+    setStreetViewLocation(location);
+    setShowStreetView(true);
+  };
 
   interface LocationOption {
     label: string;
@@ -153,9 +164,17 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           onKeyDown={handleKeyDown}
         /> */}
       </div>
-      <>
-        <MapComponent coordinates={coordinates} dataset={geoJSON ?? undefined} />
-      </>
+      {showStreetView && streetViewLocation ? (
+        <StreetViewComponent lat={streetViewLocation[0]} lon={streetViewLocation[1]} />
+      ) : (
+        <>
+          <MapComponent
+            coordinates={coordinates}
+            dataset={geoJSON ?? undefined}
+            onStreetView={handleStreetView}
+          />
+        </>
+      )}
     </div>
   );
 };

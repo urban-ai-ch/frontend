@@ -5,6 +5,10 @@
   height: calc(100vh - 29vh);
 }
 
+.super-container {
+  position: relative;
+}
+
 .popup-title {
   background-color: #f0f0f0;
   color: #333;
@@ -34,4 +38,17 @@
   white-space: nowrap;
   transform: translate(-50%, -100%);
   z-index: 2000;
+}
+
+.return-to-map-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px 20px;
+  background-color: #01E6E6;
+  color: black;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure the button is above the map */
 }

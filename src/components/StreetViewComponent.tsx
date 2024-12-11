@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useJsApiLoader } from "@react-google-maps/api";
 import "./MapComponent.css";
 
@@ -10,10 +10,11 @@ interface StreetViewProps {
 const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: 'AIzaSyC-sEXK5ybaOtt-4PezxrpHsjVvgjRIafE',
+    googleMapsApiKey: "AIzaSyC-sEXK5ybaOtt-4PezxrpHsjVvgjRIafE",
   });
 
   const panoramaRef = useRef<HTMLDivElement | null>(null);
+  const [hasPanorama, setHasPanorama] = useState<boolean>(true);
 
   const center = {
     lat: lat,
@@ -22,28 +23,36 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
 
   useEffect(() => {
     if (isLoaded && panoramaRef.current) {
-      const streetViewPanorama = new google.maps.StreetViewPanorama(panoramaRef.current, {
-        position: center,
-        pov: {
-          heading: 165,
-          pitch: 0,
-        },
-        visible: true,
-        panControl: false,
-        linksControl: false, 
-        fullscreenControl: false, 
+      const streetViewPanorama = new google.maps.StreetViewPanorama(
+        panoramaRef.current,
+        {
+          position: center,
+          pov: {
+            heading: 165,
+            pitch: 0,
+          },
+          visible: true,
+          panControl: false,
+          linksControl: false,
+          fullscreenControl: false,
+        }
+      );
+
+      google.maps.event.addListener(streetViewPanorama, "pano_changed", () => {
+        const panoId = streetViewPanorama.getPano();
+        if (!panoId) {
+          setHasPanorama(false);
+        }
       });
 
-
-      google.maps.event.addListener(streetViewPanorama, 'pano_changed', () => {
-        console.log('New Panorama Pano ID:', streetViewPanorama.getPano());
-      });
-
-
-      google.maps.event.addListener(streetViewPanorama, 'status_changed', () => {
-        const status = streetViewPanorama.getStatus();
-        console.log('Panorama status:', status);
-      });
+      google.maps.event.addListener(
+        streetViewPanorama,
+        "status_changed",
+        () => {
+          const status = streetViewPanorama.getStatus();
+          console.log("Panorama status:", status);
+        }
+      );
 
       // Optional: Return cleanup function to remove event listener and street view when component unmounts
       return () => {
@@ -54,7 +63,11 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   }, [isLoaded, center]);
 
   return isLoaded ? (
-    <div className="map-container" ref={panoramaRef}></div>
+      hasPanorama ? (
+        <div ref={panoramaRef} className="map-container"></div>
+      ) : (
+        <div>No Street View available at this location.</div>
+      )
   ) : (
     <div>Loading...</div>
   );

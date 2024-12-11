@@ -22,6 +22,10 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     setShowStreetView(true);
   };
 
+  const handleButtonClick = () => {
+    setShowStreetView(false);
+  };
+
   interface LocationOption {
     label: string;
     value: [number, number]; // Tuple for longitude and latitude
@@ -167,7 +171,13 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
         /> */}
       </div>
       {showStreetView && streetViewLocation ? (
-        <StreetViewComponent lat={streetViewLocation[0]} lon={streetViewLocation[1]} />
+        <div className="super-container">
+          <StreetViewComponent
+            lat={streetViewLocation[0]}
+            lon={streetViewLocation[1]}
+          />
+          <button className="return-to-map-button" onClick={handleButtonClick}>Return to map</button>
+        </div>
       ) : (
         <>
           <MapComponent

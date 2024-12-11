@@ -9,7 +9,8 @@ import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
 // import { apiRequest } from "../api";
-
+import { createFeatureStyle } from "./MapStyles";
+// import LegendStyle from "./LegendStyle";
 
 
 export function MapComponent({
@@ -58,6 +59,27 @@ export function MapComponent({
     "area_in_me",
     "SHAPE_Area",
   ];
+  // Extract unique materials
+/*   useEffect(() => {
+    if (dataset) {
+      const geojsonFormat = new GeoJSON();
+      const features = geojsonFormat.readFeatures(dataset, {
+        featureProjection: "EPSG:3857",
+      });
+
+      const materialSet = new Set<string>();
+
+      features.forEach((feature) => {
+        const properties = feature.getProperties();
+        const material = properties["material"]; // Adjust "material" to the correct property name
+        if (material) {
+          materialSet.add(material);
+        }
+      });
+
+      console.log("Unique Materials:", Array.from(materialSet));
+    }
+  }, [dataset]); */
 
   // Display map
   useEffect(() => {
@@ -104,6 +126,7 @@ export function MapComponent({
 
       mapRef.current.on("singleclick", (event) => {
         let featureFound = false;
+        console.log("Single click event", event.coordinate);
 
         mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
           featureFound = true;
@@ -158,6 +181,7 @@ export function MapComponent({
         source: new VectorSource({
           features: features,
         }),
+        style: (feature) => createFeatureStyle(feature), // Apply external dynamic style
       });
 
       mapRef.current?.addLayer(datasetLayer);
@@ -173,6 +197,7 @@ export function MapComponent({
   return (
     <div>
       <div id="map" className="map-container" />
+      {/* <LegendStyle /> Add the legend here */}
       <div className="popup" ref={popupRef}>
         <div className="popup-title">Properties</div>
         <div className="popup-content">{popupText}</div>

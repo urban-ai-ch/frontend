@@ -6,10 +6,10 @@ import { useAuth } from "../../AuthContext";
 import "./Return.css";
 
 type SessionStatusResponse = {
-  status: string | null;
+  status: string;
+  quantity: number;
+  amount_total: number;
   customer_email: string | null;
-  quantity: number | null;
-  amount_total: number | null;
 };
 
 const Return: React.FC = () => {
@@ -17,7 +17,9 @@ const Return: React.FC = () => {
 
   const [status, setStatus] = useState<string | null>(null);
 
-  const [tokenQuantity, setTokenQuantity] = useState<number | null | undefined>(null);
+  const [tokenQuantity, setTokenQuantity] = useState<number | null | undefined>(
+    null
+  );
   const [cost, setCost] = useState<number | null | undefined>(null);
 
   const [customerEmail, setCustomerEmail] = useState("");
@@ -92,7 +94,9 @@ const Return: React.FC = () => {
           If you continue to face issues, feel free to reach out to our support
           team <Link to="/contact">here</Link>.
         </p>
-        <button onClick={handleReturnHome} className="explore-button secondary">Back to home</button>
+        <button onClick={handleReturnHome} className="explore-button secondary">
+          Back to home
+        </button>
       </section>
     );
   }

@@ -11,7 +11,6 @@ import VectorSource from "ol/source/Vector";
 // import { apiRequest } from "../api";
 import { createFeatureStyle } from "./MapStyles";
 
-
 export function MapComponent({
   coordinates,
   dataset,
@@ -20,7 +19,6 @@ export function MapComponent({
   coordinates: [number, number];
   dataset: GeoJSON | undefined;
   onStreetView: (location: [number, number]) => void;
-
 }) {
   const mapRef = useRef<Map | null>(null);
   const vectorSourceRef = useRef<VectorSource | null>(null);
@@ -59,7 +57,7 @@ export function MapComponent({
     "SHAPE_Area",
   ];
   // Extract unique materials
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (dataset) {
       const geojsonFormat = new GeoJSON();
       const features = geojsonFormat.readFeatures(dataset, {
@@ -104,7 +102,6 @@ export function MapComponent({
           zoom: 13,
         }),
       });
-
     } else {
       // Update map view when coordinates change
       mapRef.current.getView().setCenter(fromLonLat(coordinates));
@@ -120,6 +117,11 @@ export function MapComponent({
         positioning: "bottom-center",
         stopEvent: true,
       });
+
+      const hidePopup = () => {
+        setPopupText([]);
+        popupOverlay.setPosition(undefined);
+      };
 
       mapRef.current.addOverlay(popupOverlay);
 
@@ -141,14 +143,22 @@ export function MapComponent({
                 </div>
               ));
 
-            setPopupText(filteredProperties);
+            setPopupText([
+              <button
+                className="hide-popup-button"
+                onClick={hidePopup}
+              >
+                <span className="fa fa-arrow-left"></span>
+              </button>,
+              ...filteredProperties,
+            ]);
           }
           popupOverlay.setPosition(event.coordinate);
         });
 
         if (!featureFound) {
           const c = event.coordinate;
-          const [lat, lon] = transform(c, 'EPSG:3857', 'EPSG:4326');
+          const [lat, lon] = transform(c, "EPSG:3857", "EPSG:4326");
           setPopupText([
             <div key="no-data" className="popup-row">
               <strong>Notice:</strong> No data available for this location.
@@ -160,6 +170,13 @@ export function MapComponent({
               onClick={() => onStreetView([lon ?? 0, lat ?? 0])}
             >
               Access Google Maps
+            </button>,
+            <button
+              key="hide-popup-button"
+              className="hide-popup-button"
+              onClick={hidePopup}
+            >
+              <span className="icon-back">&#x2190;</span>
             </button>,
           ]);
           popupOverlay.setPosition(event.coordinate);

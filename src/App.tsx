@@ -14,6 +14,8 @@ import Input from "./components/Input";
 import About from "./components/About";
 import HomePage from "./components/HomePage";
 import Profile from "./components/Profile";
+import CheckoutForm from "./components/payment/Checkout";
+import Return from "./components/payment/Return";
 import { useAuth } from "./AuthContext";
 
 function App() {
@@ -29,7 +31,11 @@ function App() {
           <Route path="/input" element={<Input />} />
           <Route path="/profile" element={<Profile />} />
           {isAuthenticated ? (
-            <Route path="/tool" element={<ToolPage />} />
+            <>
+              <Route path="/checkout" element={<CheckoutForm />} />
+              <Route path="/return" element={<Return />} />
+              <Route path="/tool" element={<ToolPage />} />
+            </>
           ) : (
             <>
               <Route path="/login" element={<Login />} />

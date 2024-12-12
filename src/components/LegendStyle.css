@@ -1,0 +1,105 @@
+.legend-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px; 
+  /* padding-left: 20px; */
+  align-items: flex-start;
+  /* border: 1px solid #ccc; */
+  /* border-radius: 5px; */
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.toggle-legend-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  width: 140px; /* Fixed width for the button */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  word-wrap: break-word; /* Allow wrapping inside the button */
+  white-space: normal; /* Enable multi-line text */
+  transition: background-color 0.3s ease;
+}
+
+.toggle-legend-button:hover {
+  background-color: #0056b3;
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
+}
+
+.legend-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: whitesmoke;
+  text-align: center;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap; /* Wrap items if needed */
+  gap: 10px; /* Space between items */
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: whitesmoke;
+  gap: 3px;
+}
+
+.legend-color {
+  flex-shrink: 0; /* Prevent the circle from shrinking */
+  width: 1rem; /* Adjust size if necessary */
+  height: 01rem; /* Keep the circle size consistent */
+  border-radius: 50%;
+  border: 1px solid #000;
+}
+
+@media (max-width: 1200px) {
+  .toggle-legend-button {
+    width: 200px;
+    padding: 5px;
+  }
+
+  .legend-container{
+    flex-direction: column;
+  }
+
+  .legend-item { 
+    font-size: 0.9em;
+    gap: 0px;
+  }
+
+  .legend-color {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .legend-container{
+    flex-direction: column;
+  }
+
+  .toggle-legend-button {
+    width: 100px;
+    padding: 5px;
+  }
+
+  .legend-color {
+    width: 15px;
+    height: 15px;
+  }
+}

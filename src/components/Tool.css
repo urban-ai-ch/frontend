@@ -5,19 +5,23 @@
 .filter-menu {
     display: flex;
     flex-wrap: nowrap; 
-    gap: 10px;  
+    gap: 15px;  
+    align-items: flex-start;
+    padding-bottom: 10px;
+    /* background-color: #f9f9f9; */
 }
 
-.return-to-map-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    background-color: #01E6E6;
-    color: black;
-    border: none;
-    border-radius: 100px;
+.filter-menu .input-button {
     cursor: pointer;
-    z-index: 1000; /* Ensure the button is above the map */
-  }
+    transition: transform 0.3s ease;
+}
   
+.filter-menu .input-button:hover {
+    transform: scale(1.05); 
+}
+  
+
+/* Position the legend in the filter-menu */
+.filter-menu .legend {
+    max-width: 450px; /* Optional: Limit legend width */
+}

@@ -178,7 +178,9 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
             lat={streetViewLocation[0]}
             lon={streetViewLocation[1]}
           />
-          <button className="return-to-map-button" onClick={handleButtonClick}>Return to map</button>
+          <button className="return-to-map-button" onClick={handleButtonClick}>
+            Return to map
+          </button>
         </div>
       ) : (
         <>

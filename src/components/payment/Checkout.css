@@ -1,0 +1,7 @@
+#checkout {
+  margin: auto;
+  border-style: solid;
+  border-color: var(--accent-color);
+  width: 100vh;
+}
+

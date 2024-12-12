@@ -8,6 +8,8 @@ import { apiRequest } from "../../api";
 import { useAuth } from "../../AuthContext";
 import { useCallback } from "react";
 
+import "./Checkout.css"
+
 type OrderResponse = {
   clientSecret: string;
 };

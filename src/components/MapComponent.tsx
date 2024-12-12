@@ -25,6 +25,8 @@ export function MapComponent({
 
   const popupRef = useRef<HTMLDivElement | null>(null);
   const [popupText, setPopupText] = useState<JSX.Element[]>([]);
+  const [popOverlay, setPopOverlay] = useState<Overlay | null>(null);
+  const [clickCoords, setClickCoords] = useState<[number, number] | null>(null);
 
   const DISPLAY_PROPERTIES = [
     "architectu",
@@ -78,6 +80,10 @@ export function MapComponent({
     }
   }, [dataset]); */
 
+  const hidePopup = () => {
+    popOverlay?.setPosition(undefined);
+  };
+
   // Display map
   useEffect(() => {
     if (!mapRef.current) {
@@ -118,12 +124,8 @@ export function MapComponent({
         stopEvent: true,
       });
 
-      const hidePopup = () => {
-        setPopupText([]);
-        popupOverlay.setPosition(undefined);
-      };
-
       mapRef.current.addOverlay(popupOverlay);
+      setPopOverlay(popupOverlay);
 
       mapRef.current.on("singleclick", (event) => {
         let featureFound = false;
@@ -143,15 +145,7 @@ export function MapComponent({
                 </div>
               ));
 
-            setPopupText([
-              <button
-                className="hide-popup-button"
-                onClick={hidePopup}
-              >
-                <span className="fa fa-arrow-left"></span>
-              </button>,
-              ...filteredProperties,
-            ]);
+            setPopupText(filteredProperties);
           }
           popupOverlay.setPosition(event.coordinate);
         });
@@ -159,25 +153,12 @@ export function MapComponent({
         if (!featureFound) {
           const c = event.coordinate;
           const [lat, lon] = transform(c, "EPSG:3857", "EPSG:4326");
+          if (lon && lat) setClickCoords([lon, lat]);
           setPopupText([
             <div key="no-data" className="popup-row">
               <strong>Notice:</strong> No data available for this location.
               Would you like to access Google Maps StreetView?
             </div>,
-            <button
-              key="google-maps-button"
-              className="Google-Maps-button"
-              onClick={() => onStreetView([lon ?? 0, lat ?? 0])}
-            >
-              Access Google Maps
-            </button>,
-            <button
-              key="hide-popup-button"
-              className="hide-popup-button"
-              onClick={hidePopup}
-            >
-              <span className="icon-back">&#x2190;</span>
-            </button>,
           ]);
           popupOverlay.setPosition(event.coordinate);
         }
@@ -214,8 +195,19 @@ export function MapComponent({
     <div>
       <div id="map" className="map-container" />
       <div className="popup" ref={popupRef}>
-        <div className="popup-title">Properties</div>
-        <div className="popup-content">{popupText}</div>
+        <div className="popup-title">
+          <button onClick={hidePopup} className="fa-solid fa-xmark"></button>
+          <div id="popup-title-text">Properties</div>
+        </div>
+        <div className="popup-content">
+          <div>{popupText}</div>
+          <button
+            className="streetview-button"
+            onClick={() => onStreetView([clickCoords![0], clickCoords![0]])}
+          >
+            Google Street View
+          </button>
+        </div>
       </div>
     </div>
   );

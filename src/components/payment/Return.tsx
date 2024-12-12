@@ -6,8 +6,10 @@ import { useAuth } from "../../AuthContext";
 import "./Return.css";
 
 type SessionStatusResponse = {
-  status: string;
-  customer_email: string;
+  status: string | null;
+  customer_email: string | null;
+  quantity: number | null;
+  amount_total: number | null;
 };
 
 const Return: React.FC = () => {
@@ -15,8 +17,8 @@ const Return: React.FC = () => {
 
   const [status, setStatus] = useState<string | null>(null);
 
-  const [tokenQuantity, setTokenQuantity] = useState<number | null>(null);
-  const [cost, setCost] = useState<number | null>(null);
+  const [tokenQuantity, setTokenQuantity] = useState<number | null | undefined>(null);
+  const [cost, setCost] = useState<number | null | undefined>(null);
 
   const [customerEmail, setCustomerEmail] = useState("");
   const navigate = useNavigate();
@@ -36,6 +38,8 @@ const Return: React.FC = () => {
       logout
     ).then((response) => {
       setStatus(response.status);
+      setTokenQuantity(response.data?.quantity);
+      setCost(response.data?.amount_total);
       setCustomerEmail(response.data?.customer_email ?? "");
     });
   }, []);
@@ -53,6 +57,10 @@ const Return: React.FC = () => {
           If you have any questions, please feel free to reach out to our
           support team <Link to="/contact">here</Link>.
         </p>
+        <ul>
+          <li>Tokens purchased: {tokenQuantity}</li>
+          <li>Total spent: {cost}</li>
+        </ul>
         <button onClick={handleReturnHome} className="explore-button primary">
           Explore
         </button>

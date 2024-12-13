@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useJsApiLoader } from "@react-google-maps/api";
 import "./MapComponent.css";
 
 interface StreetViewProps {
@@ -8,11 +7,6 @@ interface StreetViewProps {
 }
 
 const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: import.meta.env["VITE_MAPS_API_KEY"],
-  });
-
   const panoramaRef = useRef<HTMLDivElement | null>(null);
   const [hasPanorama, setHasPanorama] = useState<boolean>(true);
 
@@ -22,7 +16,8 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   };
 
   useEffect(() => {
-    if (isLoaded && panoramaRef.current) {
+    if (panoramaRef.current) {
+      const streetViewService = new google.maps.StreetViewService();
       const streetViewPanorama = new google.maps.StreetViewPanorama(
         panoramaRef.current,
         {
@@ -38,19 +33,15 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
         }
       );
 
-      google.maps.event.addListener(streetViewPanorama, "pano_changed", () => {
-        const panoId = streetViewPanorama.getPano();
-        if (!panoId) {
-          setHasPanorama(false);
-        }
-      });
-
-      google.maps.event.addListener(
-        streetViewPanorama,
-        "status_changed",
-        () => {
-          const status = streetViewPanorama.getStatus();
-          console.log("Panorama status:", status);
+      streetViewService.getPanorama(
+        { location: center, radius: 50 },
+        (_, status) => {
+          if (status === google.maps.StreetViewStatus.OK) {
+            streetViewPanorama.setPosition(center);
+            setHasPanorama(true);
+          } else {
+            setHasPanorama(false);
+          }
         }
       );
 
@@ -60,16 +51,12 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
       };
     }
     return undefined;
-  }, [isLoaded, center]);
+  }, [center]);
 
-  return isLoaded ? (
-    hasPanorama ? (
-      <div ref={panoramaRef} className="map-container"></div>
-    ) : (
-      <div>No Street View available at this location.</div>
-    )
+  return hasPanorama ? (
+    <div ref={panoramaRef} className="map-container"></div>
   ) : (
-    <div>Loading...</div>
+    <div>No Street View available at this location.</div>
   );
 };
 

@@ -58,27 +58,6 @@ export function MapComponent({
     "area_in_me",
     "SHAPE_Area",
   ];
-  // Extract unique materials
-  /*   useEffect(() => {
-    if (dataset) {
-      const geojsonFormat = new GeoJSON();
-      const features = geojsonFormat.readFeatures(dataset, {
-        featureProjection: "EPSG:3857",
-      });
-
-      const materialSet = new Set<string>();
-
-      features.forEach((feature) => {
-        const properties = feature.getProperties();
-        const material = properties["material"]; // Adjust "material" to the correct property name
-        if (material) {
-          materialSet.add(material);
-        }
-      });
-
-      console.log("Unique Materials:", Array.from(materialSet));
-    }
-  }, [dataset]); */
 
   const hidePopup = () => {
     popOverlay?.setPosition(undefined);
@@ -129,7 +108,10 @@ export function MapComponent({
 
       mapRef.current.on("singleclick", (event) => {
         let featureFound = false;
-        console.log("Single click event", event.coordinate);
+        
+        const c = event.coordinate;
+        const [lon, lat] = transform(c, "EPSG:3857", "EPSG:4326");
+        if (lon && lat) setClickCoords([lat, lon]);
 
         mapRef.current?.forEachFeatureAtPixel(event.pixel, (feature) => {
           featureFound = true;
@@ -151,9 +133,6 @@ export function MapComponent({
         });
 
         if (!featureFound) {
-          const c = event.coordinate;
-          const [lat, lon] = transform(c, "EPSG:3857", "EPSG:4326");
-          if (lon && lat) setClickCoords([lon, lat]);
           setPopupText([
             <div key="no-data" className="popup-row">
               <strong>Notice:</strong> No data available for this location.
@@ -203,7 +182,7 @@ export function MapComponent({
           <div>{popupText}</div>
           <button
             className="streetview-button"
-            onClick={() => onStreetView([clickCoords![0], clickCoords![0]])}
+            onClick={() => onStreetView([clickCoords![0], clickCoords![1]])}
           >
             Google Street View
           </button>

@@ -16,6 +16,7 @@ import HomePage from "./components/HomePage";
 import Profile from "./components/Profile";
 import CheckoutForm from "./components/payment/Checkout";
 import Return from "./components/payment/Return";
+import UrbanAI from "./components/UrbanAI"
 import { useAuth } from "./AuthContext";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/input" element={<Input />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/urban-ai" element={<UrbanAI/>}/>
           {isAuthenticated ? (
             <>
               <Route path="/checkout" element={<CheckoutForm />} />

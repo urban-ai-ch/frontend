@@ -64,6 +64,11 @@ export function Navbar() {
               Contact
             </Link>
           </li>
+          <li>
+            <Link to="urban-ai" onClick={closeMenu}>
+              Urban-AI
+            </Link>
+          </li>
           <li className="navbar-tool-button">
             <Link
               to={auth.isAuthenticated ? "/tool" : "/login"}

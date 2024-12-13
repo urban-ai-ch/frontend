@@ -55,18 +55,13 @@ export function Navbar() {
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/about" onClick={closeMenu}>
-              About us
-            </Link>
-          </li>
-          <li>
-            <Link to="/contact" onClick={closeMenu}>
-              Contact
-            </Link>
-          </li>
-          <li>
-            <Link to="urban-ai" onClick={closeMenu}>
+            <Link to="/urban-ai" onClick={closeMenu}>
               Urban-AI
+            </Link>
+          </li>
+          <li>
+            <Link to="/checkout" onClick={closeMenu}>
+              Tokens
             </Link>
           </li>
           <li className="navbar-tool-button">
@@ -75,6 +70,16 @@ export function Navbar() {
               onClick={closeMenu}
             >
               Explore
+            </Link>
+          </li>
+          <li>
+            <Link to="/about" onClick={closeMenu}>
+              About us
+            </Link>
+          </li>
+          <li>
+            <Link to="/contact" onClick={closeMenu}>
+              Contact
             </Link>
           </li>
         </ul>

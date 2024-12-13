@@ -9,6 +9,7 @@ import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
 import GeoJSON from "ol/format/GeoJSON";
 import StreetViewComponent from "./StreetViewComponent";
+import { useJsApiLoader } from "@react-google-maps/api";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   const { logout } = useAuth();
@@ -17,6 +18,11 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
   const [streetViewLocation, setStreetViewLocation] = useState<
     [number, number] | null
   >(null);
+
+  const { isLoaded } = useJsApiLoader({
+    id: "google-map-script",
+    googleMapsApiKey: "AIzaSyC-sEXK5ybaOtt-4PezxrpHsjVvgjRIafE",
+  });
 
   const handleStreetView = (location: [number, number]) => {
     setStreetViewLocation(location);
@@ -172,14 +178,14 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
         /> */}
         <LegendStyle /> {/* Add the LegendStyle component here */}
       </div>
-      {showStreetView && streetViewLocation ? (
+      {isLoaded && showStreetView && streetViewLocation ? (
         <div className="super-container">
           <StreetViewComponent
             lat={streetViewLocation[0]}
             lon={streetViewLocation[1]}
           />
           <button className="return-to-map-button" onClick={handleButtonClick}>
-            Return to map
+            Back to map
           </button>
         </div>
       ) : (

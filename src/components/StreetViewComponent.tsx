@@ -56,7 +56,7 @@ const StreetViewComponent: React.FC<StreetViewProps> = ({ lat, lon }) => {
   return hasPanorama ? (
     <div ref={panoramaRef} className="map-container"></div>
   ) : (
-    <div>No Street View available at this location.</div>
+    <div id="no-sv-available">No Street View available at this location.</div>
   );
 };
 

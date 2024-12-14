@@ -1,8 +1,8 @@
 // import React from "react";
-import ExploreButton from "./ExploreButton"; // Import the reusable button
+import ExploreButton from "../ExploreButton"; // Import the reusable button
 import "./BigHeroSection.css";
-import HomePagemap from "../img/HomePagemap6.jpeg";
-import { useAuth } from "../AuthContext";
+import HomePagemap from "../../img/HomePagemap6.jpeg";
+import { useAuth } from "../../AuthContext";
 
 const BigHeroSection = () => {
   const auth = useAuth();

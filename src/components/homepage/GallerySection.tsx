@@ -1,11 +1,11 @@
 import "./GallerySection.css";
-import ExploreButton from "./ExploreButton"; // Import the reusable button
-import imgZurich from "../img/Zurich.jpg";
-import imgMelbourne from "../img/Melbourne.jpg";
-import imgMumbai from "../img/Mumbai.jpg";
-import imgCapeTown from "../img/Cape_Town.jpg";
-import imgSanFrancisco from "../img/San_Francisco.jpg";
-import imgRio from "../img/Rio.jpg";
+import ExploreButton from "../ExploreButton"; // Import the reusable button
+import imgZurich from "../../img/Zurich.jpg";
+import imgMelbourne from "../../img/Melbourne.jpg";
+import imgMumbai from "../../img/Mumbai.jpg";
+import imgCapeTown from "../../img/Cape_Town.jpg";
+import imgSanFrancisco from "../../img/San_Francisco.jpg";
+import imgRio from "../../img/Rio.jpg";
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 const GallerySection = () => {

@@ -17,7 +17,7 @@ export default function UrbanAI() {
   const [, setUploadedImages] = useState<ImageObject[]>([]);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [userPrompt, setUserPrompt] = useState<string>('');
+  const [userPrompt, setUserPrompt] = useState<string>("");
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;

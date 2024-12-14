@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./UrbanAI.css";
 import { apiRequest } from "../api";
 import { useAuth } from "../AuthContext";
@@ -18,6 +18,7 @@ export default function UrbanAI() {
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [userPrompt, setUserPrompt] = useState<string>("");
+  const [overlayImage, setOverlayImage] = useState<string | null>(null); // For full-screen overlay
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -74,6 +75,31 @@ export default function UrbanAI() {
   const handleClosePreview = () => {
     setIsUploaded(false);
   };
+
+  const handleImageClick = (url: string) => {
+    setOverlayImage(url);
+  };
+
+  const closeOverlay = () => {
+    setOverlayImage(null); // Close the overlay
+  };
+
+  // Listen for Escape key to close the overlay
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeOverlay();
+      }
+    };
+
+    // Add the event listener
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   // Handle drag events
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
@@ -153,6 +179,7 @@ export default function UrbanAI() {
                     src={url}
                     alt={`Preview ${index}`}
                     className="preview-image"
+                    onClick={() => handleImageClick(url)} // Handle click event
                   />
                 ))}
               </div>
@@ -167,11 +194,31 @@ export default function UrbanAI() {
                   value={userPrompt}
                   onChange={(e) => setUserPrompt(e.target.value)}
                 />
-                <button disabled={loading || images.length === 0}>
-                  {loading ? "Uploading..." : "Upload"}
-                </button>
+                <div className="Enter-Upload">
+                  <label htmlFor="upload-button" id="custom-button-2">
+                    <i>New image</i>
+                  </label>
+                  <input
+                    id="upload-button"
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    onChange={handleFileChange}
+                  ></input>
+                  <button disabled={loading || images.length === 0}>
+                    {loading ? "Processing..." : "Enter"}
+                  </button>
+                </div>
               </form>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Full-screen overlay */}
+      {overlayImage && (
+        <div className="overlay" onClick={closeOverlay}>
+          <div className="overlay-content">
+            <img src={overlayImage} alt="Full-size preview" />
           </div>
         </div>
       )}

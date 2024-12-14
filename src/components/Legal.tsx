@@ -23,6 +23,13 @@ const Legal: React.FC = () => {
         <a href="mailto:support@urban-ai.ch">support@urban-ai.ch</a> or through
         our <a href="https://urban-ai.ch/contact">contact form</a>.
       </p>
+      <h3>Warranty</h3>
+      <p>
+        We guarantee that you will receive the services associated with the
+        tokens purchased. However, please note that refunds or chargebacks are
+        not possible. If the service is not provided, we will refund the
+        equivalent tokens, but no monetary refunds will be issued.
+      </p>
       <h3>Refund and chargeback policy</h3>
       <p> Please note that refunds or chargebacks are not possible.</p>
       <h3>Cancellation policy</h3>

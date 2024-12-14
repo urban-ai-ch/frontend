@@ -30,8 +30,6 @@ const Legal: React.FC = () => {
         not possible. If the service is not provided, we will refund the
         equivalent tokens, but no monetary refunds will be issued.
       </p>
-      <h3>Refund and chargeback policy</h3>
-      <p> Please note that refunds or chargebacks are not possible.</p>
       <h3>Cancellation policy</h3>
       <p>
         Please note that cancellation is not guaranteed. However, it may be

@@ -21,23 +21,23 @@ const HomePage = () => {
       <BigHeroSection />
       <SmallImageWithText
         imageSrc={homepageSmall1}
-        title="section1"
+        title="AI Output Example"
         description="Obtain intelligent architectural insigts through an AI powered state-of-the art approach."
       />
       <SmallImageWithText
         imageSrc={homepageSmall2}
-        title="section2"
+        title="Historical Score Zurich Example"
         description="Discover a vast and curated dataset from five major cities in the world, including Zurich, Mumbai and Melbourne."
         reverse
       />
       <SmallImageWithText
         imageSrc={homepageSmall3}
-        title="section3"
+        title="Image showing Upload Icon"
         description="Upload your own images to optain information that matters to you."
       />
       <SmallImageWithText
         imageSrc={homepageSmall4}
-        title="section4"
+        title="Image of a building on the street"
         description="Use our Google StreetView integration to obtain high-quality insights into locations you do not have access to."
         reverse
       />

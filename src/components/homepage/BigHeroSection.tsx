@@ -9,7 +9,7 @@ const BigHeroSection = () => {
 
   return (
     <div className="big-hero-section">
-      <img src={HomePagemap} alt="Big Hero Background" className="hero-image" />
+      <img src={HomePagemap} alt="Zurich City Background" className="hero-image" />
       <div className="hero-content">
         <h1>Visualize urban data on the circular economy like never before</h1>
         <ExploreButton

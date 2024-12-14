@@ -12,10 +12,21 @@
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  border: 1px dotted var(--accent-color);
-  width: 80vh;
-  height: 50vh;
+  border: 1px solid var(--accent-color);
   border-radius: 30px;
+  width: 40vw;
+  height: 60vh;
+}
+
+.Enter-Upload {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+button,
+label {
+  display: inline-block;
 }
 
 #upload-button {
@@ -33,6 +44,19 @@
   color: black;
   display: flex;
   gap: 0.5rem;
+}
+
+#custom-button-2 {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: darkgray;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0px;
 }
 
 #upload-icon {
@@ -55,6 +79,8 @@
 
 .submission-container {
   display: flex;
+  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   gap: 2rem; /* Space between the two columns */
   width: 100%;
@@ -65,7 +91,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: flex-start;
+  align-items: center;
   padding: 10px;
   border-radius: 5px;
 }
@@ -75,7 +101,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .ai-submission-form h3 {
@@ -93,4 +119,34 @@
 
 .ai-submission-form form button:disabled {
   background-color: lightgray;
+}
+
+/* Full-screen overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.overlay-content img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+.preview-image {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.preview-image:hover {
+  transform: scale(1.1);
 }

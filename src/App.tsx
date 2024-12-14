@@ -16,8 +16,9 @@ import HomePage from "./components/HomePage";
 import Profile from "./components/Profile";
 import CheckoutForm from "./components/payment/Checkout";
 import Return from "./components/payment/Return";
-import UrbanAI from "./components/UrbanAI"
+import UrbanAI from "./components/UrbanAI";
 import { useAuth } from "./AuthContext";
+import Legal from "./components/Legal";
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -31,7 +32,8 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/input" element={<Input />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/urban-ai" element={<UrbanAI/>}/>
+          <Route path="/urban-ai" element={<UrbanAI />} />
+          <Route path="/legal" element={<Legal />} />
           {isAuthenticated ? (
             <>
               <Route path="/checkout" element={<CheckoutForm />} />

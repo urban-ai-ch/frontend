@@ -55,11 +55,6 @@ export function Navbar() {
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
           <li>
-            <Link to="/legal" onClick={closeMenu}>
-              Legal
-            </Link>
-          </li>
-          <li>
             <Link to="/urban-ai" onClick={closeMenu}>
               Urban-AI
             </Link>
@@ -85,6 +80,11 @@ export function Navbar() {
           <li>
             <Link to="/contact" onClick={closeMenu}>
               Contact
+            </Link>
+          </li>
+          <li>
+            <Link to="/legal" onClick={closeMenu}>
+              Legal
             </Link>
           </li>
         </ul>

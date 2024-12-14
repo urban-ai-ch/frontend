@@ -14,10 +14,12 @@ import { createFeatureStyle } from "./MapStyles";
 export function MapComponent({
   coordinates,
   dataset,
+  datasetName,
   onStreetView,
 }: {
   coordinates: [number, number];
   dataset: GeoJSON | undefined;
+  datasetName: string | null; 
   onStreetView: (location: [number, number]) => void;
 }) {
   const mapRef = useRef<Map | null>(null);
@@ -157,7 +159,7 @@ export function MapComponent({
         source: new VectorSource({
           features: features,
         }),
-        style: (feature) => createFeatureStyle(feature), // Apply external dynamic style
+        style: (feature) => datasetName ? createFeatureStyle(feature, datasetName) : undefined, // Apply external dynamic style
       });
 
       mapRef.current?.addLayer(datasetLayer);
@@ -168,7 +170,7 @@ export function MapComponent({
       };
     }
     return () => {};
-  }, [dataset]);
+  }, [dataset, datasetName]);
 
   return (
     <div>

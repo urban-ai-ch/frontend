@@ -159,6 +159,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           <MapComponent
             coordinates={coordinates}
             dataset={geoJSON ?? undefined}
+            datasetName={datasetOptions.find((option) => option.value === dataset)?.label ?? "Default"} 
             onStreetView={handleStreetView}
           />
         </>

@@ -12,7 +12,7 @@ import Contact from "./components/Contact";
 import Tool from "./components/Tool";
 import Input from "./components/Input";
 import About from "./components/About";
-import HomePage from "./components/HomePage";
+import HomePage from "./components/homepage/HomePage";
 import Profile from "./components/Profile";
 import CheckoutForm from "./components/payment/Checkout";
 import Return from "./components/payment/Return";

@@ -3,14 +3,14 @@ import "./HomePage.css";
 import BigHeroSection from "./BigHeroSection";
 import SmallImageWithText from "./SmallImageWithText";
 import GallerySection from "./GallerySection";
-import ExploreButton from "./ExploreButton";
-import homepageSmall1 from "../img/homepageSmall1.jpeg";
-import homepageSmall2 from "../img/homepageSmall2.jpeg";
+import ExploreButton from "../ExploreButton";
+import homepageSmall1 from "../../img/homepageSmall1.jpeg";
+import homepageSmall2 from "../../img/homepageSmall2.jpeg";
 // import homepageSmall3 from "../img/homepageSmall3.webp";
 // import homepageSmall3 from "../img/homepageSmall3v2.jpeg";
-import homepageSmall3 from "../img/homepageSmall3v3.jpg";
-import homepageSmall4 from "../img/homepageSmall4.jpeg";
-import { useAuth } from "../AuthContext";
+import homepageSmall3 from "../../img/homepageSmall3v3.jpg";
+import homepageSmall4 from "../../img/homepageSmall4.jpeg";
+import { useAuth } from "../../AuthContext";
 
 const HomePage = () => {
 

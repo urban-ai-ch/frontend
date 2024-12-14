@@ -15,7 +15,8 @@
   border: 1px solid var(--accent-color);
   border-radius: 30px;
   width: 40vw;
-  height: 60vh;
+  height: 850px;
+  overflow-x: hidden;
 }
 
 .Enter-Upload {

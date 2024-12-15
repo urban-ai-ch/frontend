@@ -141,7 +141,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           onChange={(newDataset: string) => setDataset(newDataset)}
           enabled={showStreetView}
         />
-        <InputButton label="Input" to="/Input" variant="primary" />
+        {/* <InputButton label="Input" to="/Input" variant="primary" /> */}
         <LegendStyle /> {/* Add the LegendStyle component here */}
       </div>
       {isLoaded && showStreetView && streetViewLocation ? (

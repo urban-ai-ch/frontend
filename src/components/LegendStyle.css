@@ -10,8 +10,8 @@
 }
 
 .toggle-legend-button {
-  background-color: #007bff;
-  color: white;
+  background-color: var(--accent-color);
+  color: black;
   padding: 10px;
   width: 140px; /* Fixed width for the button */
   border: none;
@@ -24,7 +24,7 @@
 }
 
 .toggle-legend-button:hover {
-  background-color: #0056b3;
+  background-color: white;
 }
 
 .legend {

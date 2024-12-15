@@ -11,7 +11,8 @@ type ImageObject = {
 
 export default function UrbanAIUploader() {
   const [uploadedImages, setUploadedImages] = useState<ImageObject[]>([]);
-  const { logout } = useAuth();
+  const [, setLoading] = useState(false);
+  const { isAuthenticated, logout } = useAuth();
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -34,6 +35,40 @@ export default function UrbanAIUploader() {
     fetchImages();
   }, []);
 
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files) {
+      const fileArray = Array.from(files);
+      const formData = new FormData();
+      fileArray.forEach((image) => formData.append("image", image));
+
+      try {
+        const uploadResponse = await apiRequest<ImageObject[]>(
+          "/images/v1/images",
+          {
+            method: "POST",
+            body: formData,
+          },
+          logout
+        );
+
+        if (uploadResponse.status === "success" && uploadResponse.data) {
+          alert("Images uploaded successfully!");
+
+          const newImages: ImageObject[] = uploadResponse.data;
+          setUploadedImages((prevImages) => [...prevImages, ...newImages]); // Create a new array
+        } else {
+          alert("Failed to upload image.");
+        }
+      } catch (error) {
+        console.error("Upload error:", error);
+        alert("An error occurred while uploading images.");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
   return (
     <div id="ai-upload-portal">
       <h1>Urban-AI Image Portal</h1>
@@ -41,6 +76,16 @@ export default function UrbanAIUploader() {
         Directly access our top-of-the-line Artificial Intelligence model
         Urban-AI to get insights that matter to <strong>you</strong>.
       </p>
+      <label htmlFor="upload-button" id="custom-button">
+        <i className="fa-solid fa-upload"></i>
+      </label>
+      <input
+        id="upload-button"
+        type="file"
+        accept="image/png, image/jpeg"
+        disabled = {!isAuthenticated}
+        onChange={handleUpload}
+      ></input>
       {uploadedImages.map((image) => (
         <UrbanAIPreview uploadedImage={image}></UrbanAIPreview>
       ))}

@@ -1,13 +1,33 @@
 .upload-preview {
-    display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    width: 90vw;
-    height: 10vw;
-    border: solid 1px var(--accent-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+  justify-content: space-between;
+  padding: 10px;
+  gap: 0.5rem;
+  width: 90vw;
+  height: 30vh;
+  border: solid 1px var(--accent-color);
 }
 
 .preview-uploaded-image {
-    width: 16vw;
-    /* border: solid 1px var(--accent-color); */
+  width: 25vw;
+  height: calc(100% - 5px);
+  border: solid 1px var(--accent-color);
+}
+
+.image-row {
+  display: flex; /* Use Flexbox for layout */
+  align-items: center; /* Vertically align items */
+  justify-content: center;
+  height: 100%;
+  gap: 10px; /* Add spacing between elements */
+}
+
+.ai-output {
+    width: 25vw;
+    height: calc(100% - 5px);
+    border: solid 1px var(--accent-color);
+    padding: 10px;
+    box-sizing: border-box;
 }

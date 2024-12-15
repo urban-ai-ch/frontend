@@ -12,6 +12,7 @@ const PricingPage: React.FC = () => {
           subtitle="For individuals"
           price="10/month"
           link="/basic-plan"
+			 buttonText="Select Basic"
           features={[
             { text: "Access to basic features", available: true },
             { text: "10 GB storage", available: true },
@@ -24,6 +25,7 @@ const PricingPage: React.FC = () => {
           subtitle="For small teams"
           price="30/month"
           link="/pro-plan"
+			 buttonText="Select Pro"
           features={[
             { text: "Access to all features", available: true },
             { text: "100 GB storage", available: true },
@@ -36,6 +38,7 @@ const PricingPage: React.FC = () => {
           subtitle="For large organizations"
           price="100/month"
           link="/enterprise-plan"
+			 buttonText="Select Enterprise"
           features={[
             { text: "Dedicated account manager", available: true },
             { text: "Unlimited storage", available: true },

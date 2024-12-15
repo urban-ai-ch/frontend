@@ -3,7 +3,7 @@
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	padding: 20px;
-	text-align: center;
+	/* text-align: center; */
 	width: 300px; /* Fixed width */
 	/* margin: 0 auto;  */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -29,7 +29,7 @@
   
 .pricing-card-price {
 	font-size: 1.75rem;
-	color: white;
+	/* color: white; */
 	margin-bottom: 20px;
 	display: flex;
 	align-items: baseline; 
@@ -48,14 +48,16 @@
 }
   
 .pricing-card-button {
+	display: inline-block;
 	padding: 10px 20px;
 	width: 80%;
 	font-size: 1rem;
 	color: white;
 	background-color: #007bff;
 	border: none;
-	border-radius: 5px;
+	border-radius: 50px;
 	cursor: pointer;
+	text-decoration: none; /* Removes the underline */
 	transition: background-color 0.3s ease;
 	margin-bottom: 20px;
 	transition: transform 0.3s ease;
@@ -68,13 +70,13 @@
   
 .pricing-card-features {
 	list-style: none;
-	padding: 0;
+	padding-left: 10px;
 	margin: 0;
 	text-align: left;
 }
   
 .pricing-card-feature {
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	margin: 10px 0;
 	display: flex;
 	gap: 10px;
@@ -82,7 +84,7 @@
 }
 
 .feature-icon {
-	font-size: 1.2rem; /* Slightly larger for emphasis */
+	font-size: 1rem; /* Slightly larger for emphasis */
  }
  
  .tick-icon {

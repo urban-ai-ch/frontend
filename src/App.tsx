@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -16,7 +15,6 @@ import HomePage from "./components/homepage/HomePage";
 import Profile from "./components/Profile";
 import CheckoutForm from "./components/payment/Checkout";
 import Return from "./components/payment/Return";
-// import UrbanAI from "./components/UrbanAI";
 import { useAuth } from "./AuthContext";
 import Legal from "./components/Legal";
 import PricingPage from "./components/pricing/PricingPage";
@@ -32,23 +30,34 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
-          <Route path="/input" element={<Input />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/urban-ai" element={<UrbanAIUploader />} />
+          <Route
+            path="/input"
+            element={isAuthenticated ? <Input /> : <Login></Login>}
+          />
+          <Route
+            path="/profile"
+            element={isAuthenticated ? <Profile /> : <Login></Login>}
+          />
+          <Route
+            path="/urban-ai"
+            element={isAuthenticated ? <UrbanAIUploader /> : <Login></Login>}
+          />
           <Route path="/legal" element={<Legal />} />
           <Route path="/pricing" element={<PricingPage />} />
-          {isAuthenticated ? (
-            <>
-              <Route path="/checkout" element={<CheckoutForm />} />
-              <Route path="/return" element={<Return />} />
-              <Route path="/tool" element={<ToolPage />} />
-            </>
-          ) : (
-            <>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-            </>
-          )}
+          <Route
+            path="/checkout"
+            element={isAuthenticated ? <CheckoutForm /> : <Login></Login>}
+          />
+          <Route
+            path="/return"
+            element={isAuthenticated ? <Return /> : <Login></Login>}
+          />
+          <Route
+            path="/tool"
+            element={isAuthenticated ? <ToolPage /> : <Login></Login>}
+          />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Layout>
     </Router>

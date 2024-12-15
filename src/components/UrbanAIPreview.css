@@ -1,0 +1,13 @@
+.upload-preview {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    width: 90vw;
+    height: 10vw;
+    border: solid 1px var(--accent-color);
+}
+
+.preview-uploaded-image {
+    width: 16vw;
+    /* border: solid 1px var(--accent-color); */
+}

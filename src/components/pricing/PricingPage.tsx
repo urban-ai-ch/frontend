@@ -5,7 +5,7 @@ import "./PricingPage.css";
 const PricingPage: React.FC = () => {
   return (
     <div className="pricing-page">
-      <h1 className="pricing-page-title">Our Pricing Plans</h1>
+      <h1 className="pricing-page-title">Flexible Pricing, Easy Payments</h1>
       <div className="pricing-cards-container">
         <PricingCard
           title="Basic Plan"

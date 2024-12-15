@@ -120,7 +120,7 @@ export default function Contact() {
         )}
 
         {/* Submit Button */}
-        <button type="submit" className="submit-button">
+        <button type="submit" className="explore-button primary">
           Send Message
         </button>
       </form>

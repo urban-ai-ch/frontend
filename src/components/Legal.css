@@ -14,14 +14,14 @@
 /* Title styles */
 .legal-title {
   font-size: 3rem;
-  color: White;
+  /* color: White; */
   text-align: center;
 }
 
 /* Subtitle styles */
 .legal-subtitle {
   font-size: 1.4rem;
-  color: whitesmoke;
+  /* color: whitesmoke; */
   margin-top: 50px;
   margin-bottom: 10px;
   border-bottom: 2px solid #e0e0e0;

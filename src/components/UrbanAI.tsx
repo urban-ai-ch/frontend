@@ -132,8 +132,8 @@ export default function UrbanAI() {
 
   return (
     <div id="ai-upload-portal">
-      <h1>Urban-AI Image Portal</h1>
-      <p>
+      <h1 className="urban-upload-title">Urban-AI Image Portal</h1>
+      <p className="urban-upload-description">
         Directly access our top-of-the-line Artificial Intelligence model
         Urban-AI to get insights that matter to <strong>you</strong>.
       </p>

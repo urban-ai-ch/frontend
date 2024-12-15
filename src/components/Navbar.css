@@ -30,7 +30,7 @@
 
 .navbar-center .nav-links {
   display: flex;
-  gap: 50px;
+  gap: 40px;
 }
 
 .navbar-center .nav-links a {
@@ -77,7 +77,7 @@ body {
   padding-top: var(--nav-height); /* Needs to be offset by the navigation bar */
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   /* this is what apple.com uses */
 
   .navbar-tool-button {

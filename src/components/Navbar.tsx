@@ -64,6 +64,7 @@ export function Navbar() {
               Tokens
             </Link>
           </li>
+          <li><Link to="/pricing" onClick={closeMenu}>Pricing</Link></li>
           <li className="navbar-tool-button">
             <Link
               to={auth.isAuthenticated ? "/tool" : "/login"}

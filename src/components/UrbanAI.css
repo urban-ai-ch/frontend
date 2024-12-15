@@ -5,7 +5,16 @@
   align-items: center;
 }
 
+.urban-upload-title{
+	margin: 10px;
+}
+
+.urban-upload-description{
+	margin: 10px;
+}
+
 .upload-box {
+	margin-top: 20px;
   position: relative;
   display: flex;
   flex-direction: column;

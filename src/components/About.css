@@ -5,7 +5,7 @@
   gap: 2rem;
   margin: auto;
   padding: 20px;
-  max-width: 75em; /* Limit the width of the page */
+  max-width: 90em; /* Limit the width of the page */
 
 }
 .team-name {
@@ -23,9 +23,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
   /* grid-template-columns: repeat(2, 1fr);  */
-
-  /* gap: 2.5rem;  */
-
+  gap: 20px; 
 }
 
 .team-member {
@@ -36,7 +34,7 @@
   /* background-color: darkgrey;  */
   /* border-radius: 10px; */
   /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
-  /* transition: transform 0.3s ease, box-shadow 0.3s ease;  */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 /* Hover Effects */
@@ -72,13 +70,14 @@
 
 
 /* Tablet-Specific Media Query (768px - 1024px) */
-@media (max-width: 1024px) and (min-width: 768px) {
+@media (max-width: 1200px) and (min-width: 768px) {
   .team-container {
     gap: 1.5rem; /* Reduce gaps for tighter spacing */
   }
 
   .team-members {
     grid-template-columns: repeat(2, 1fr); /* Show two columns on tablets */
+		gap: 20px;
   }
 
  /*  .team-member {
@@ -107,6 +106,7 @@
 
   .team-member {
     padding: 10px; /* Reduce padding for smaller cards */
+		margin-bottom: 20px;
   }
 
   .team-member-image {

@@ -1,0 +1,99 @@
+/* PricingCard.css */
+.pricing-card {
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	padding: 20px;
+	text-align: center;
+	width: 300px; /* Fixed width */
+	/* margin: 0 auto;  */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+}
+ 
+.pricing-card:hover {
+	transform: scale(1.05);
+}
+ 
+.pricing-card-title {
+   font-size: 1.5rem;
+   font-weight: bold;
+   margin: 10px;
+}
+  
+.pricing-card-subtitle {
+	font-size: 1rem;
+	font-style: italic;
+	color: grey;
+	margin-bottom: 20px;
+}
+  
+.pricing-card-price {
+	font-size: 1.75rem;
+	color: white;
+	margin-bottom: 20px;
+	display: flex;
+	align-items: baseline; 
+	justify-content: center;
+	gap: 5px; /* Add spacing between number and duration */
+}
+
+.price-number {
+	font-size: 2rem; /* Larger font for the price number */
+	font-weight: bold;
+}
+
+.price-duration {
+	font-size: 1rem; /* Smaller font for "/month" */
+	color: grey; /* Optional: make the duration text more subtle */
+}
+  
+.pricing-card-button {
+	padding: 10px 20px;
+	width: 80%;
+	font-size: 1rem;
+	color: white;
+	background-color: #007bff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	margin-bottom: 20px;
+	transition: transform 0.3s ease;
+}
+  
+.pricing-card-button:hover {
+	background-color: #0056b3;
+	transform: scale(1.05);
+}
+  
+.pricing-card-features {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	text-align: left;
+}
+  
+.pricing-card-feature {
+	font-size: 0.9rem;
+	margin: 10px 0;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.feature-icon {
+	font-size: 1.2rem; /* Slightly larger for emphasis */
+ }
+ 
+ .tick-icon {
+	color: #28a745; /* Green for tick */
+ }
+ 
+ .cross-icon {
+	color: #dc3545; /* Red for cross */
+ }
+ 
+ .feature-text {
+	color: grey; /* Grey for feature text */
+ }
+  

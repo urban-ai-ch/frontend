@@ -1,0 +1,36 @@
+/* PricingPage.css */
+.pricing-page {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .pricing-page-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    /* color: #333; */
+  }
+  
+  .pricing-page-cards {
+    display: flex;
+    justify-content: space-between; 
+    gap: 20px; /* Spacing between cards */
+    flex-wrap: wrap; /* Allow cards to wrap on smaller screens */
+    max-width: 1200px; /* Prevent cards from stretching too wide */
+    margin: 0 auto; /* Center the card container itself */
+
+  }
+  
+  
+  /* .pricing-card {
+    width: 300px; 
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  } */
+  
+
+
+  

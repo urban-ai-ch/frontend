@@ -54,6 +54,11 @@ export function Navbar() {
 
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
+        <li>
+            <Link to="/tool" onClick={closeMenu}>
+              Map
+            </Link>
+          </li>
           <li>
             <Link to="/urban-ai" onClick={closeMenu}>
               Urban-AI

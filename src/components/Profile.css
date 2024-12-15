@@ -29,8 +29,8 @@ body {
 }
 
 .profile-header {
-  padding: 10vhpx;
-  color: #fff;
+  padding: 10px;
+  /* color: #fff; */
 }
 
 .profile-picture {
@@ -50,7 +50,7 @@ body {
 .profile-email {
   margin: 0;
   font-size: 0.9rem;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .profile-body {
@@ -61,13 +61,13 @@ body {
   margin: 0 0 10px;
   font-size: 1.2rem;
   font-weight: bold;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .profile-bio {
   margin: 0;
   font-size: 1rem;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .profile-footer {

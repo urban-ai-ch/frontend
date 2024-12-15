@@ -38,7 +38,7 @@ const HomePage = () => {
       <SmallImageWithText
         imageSrc={homepageSmall4}
         title="Image of a building on the street"
-        description="Use our Google StreetView integration to obtain high-quality insights into locations you do not have access to."
+        description="Use our Google StreetView integration to visualize the Global Facades Dataset."
         reverse
       />
       <GallerySection />

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
-import InputButton from "./InputButton";
 import LegendStyle from "./LegendStyle"; // Import the Legend
 
 import "./Tool.css";

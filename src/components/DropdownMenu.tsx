@@ -25,7 +25,7 @@ export function DropdownMenu({
 
 
   return (
-    <div>
+    <div className="dropdown-menu-map">
       <select
         disabled={enabled}
         id={name}

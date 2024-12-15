@@ -74,6 +74,7 @@
 
   .legend-container{
     flex-direction: column;
+    width: 100%;
   }
 
   .legend-item { 

@@ -55,3 +55,10 @@
     z-index: 1000; /* Ensure the button is above the map */
   }
 
+  @media (max-width: 1200px) {
+    .filter-menu {
+        flex-direction: column;
+        justify-content: 100%;
+        align-items: center;
+    }
+  }

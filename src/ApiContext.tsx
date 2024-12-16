@@ -21,7 +21,7 @@ export const ApiProvider: React.FC<{ children: ReactNode }> = ({
       Authorization: token ? `Bearer ${token}` : "",
     };
 
-    const response = await fetch(`https://api.urban-ai.ch/${endpoint}`, {
+    const response = await fetch(`https://api.urban-ai.ch${endpoint}`, {
       ...init,
       headers,
     });

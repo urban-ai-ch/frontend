@@ -75,6 +75,7 @@ export default function UrbanAIUploader() {
       <input
         id="upload-button"
         type="file"
+        multiple
         accept="image/png, image/jpeg"
         onChange={handleUpload}
       ></input>

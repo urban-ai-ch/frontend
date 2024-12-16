@@ -23,18 +23,18 @@ export default function UrbanAIPreview({
   uploadedImage: ImageObject;
 }) {
   const { fetch } = useApi();
-  const [output, setOutput] = useState<string>("output here");
+  const [output, setOutput] = useState<JSX.Element>(<></>);
   const criteriaRef = useRef<HTMLSelectElement>(null);
   const fetchImageMeta = async () => {
     const response = await fetch(`/images/v1/metadata/${uploadedImage.name}`);
     const metaData: ImageMetaData = await response.json();
 
     setOutput(
-      `Materials used: ${metaData.materials}
-      \n
-      History data: ${metaData.history}
-      \n
-      Seismic risk rating: ${metaData.seismic}`
+      <>
+        <p>Materials used: {metaData.materials}</p>
+        <p>History data: {metaData.history}</p>
+        <p>Seismic risk rating: {metaData.seismic}</p>
+      </>
     );
   };
 
@@ -47,7 +47,13 @@ export default function UrbanAIPreview({
 
     const selectedCriteria = criteriaRef.current?.value as Criteria;
     if (!selectedCriteria) {
-      setOutput("No analysis criteria selected");
+      setOutput(
+        <>
+          <p>
+            <strong>ERROR: </strong> Invalid analysis criteria
+          </p>
+        </>
+      );
       return;
     }
 
@@ -68,7 +74,11 @@ export default function UrbanAIPreview({
         await fetchImageMeta();
       }
     } catch (error) {
-      setOutput("Error: Unable to process the image.");
+      setOutput(
+        <p>
+          <strong>ERROR: </strong> Unable to process image
+        </p>
+      );
     }
   };
 

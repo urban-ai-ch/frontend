@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import "./LoginDropdown.css";
 import { useAuth } from "../AuthContext";
-import { Link, useNavigate } from "react-router-dom";
-//import { link } from "fs";
+import { useNavigate } from "react-router-dom";
 
 const LoginDropdown: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { apiRequest } from "../../api";
-import { useAuth } from "../../AuthContext";
 
 import "./Return.css";
+import { useApi } from "../../ApiContext";
 
 type SessionStatusResponse = {
   status: string;
@@ -13,7 +12,7 @@ type SessionStatusResponse = {
 };
 
 const Return: React.FC = () => {
-  const { logout } = useAuth();
+  const { fetch } = useApi();
 
   const [status, setStatus] = useState<string | null>(null);
 
@@ -34,16 +33,15 @@ const Return: React.FC = () => {
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    apiRequest<SessionStatusResponse>(
-      `/tokens/v1/session-status?session_id=${sessionId}`,
-      {},
-      logout
-    ).then((response) => {
-      setStatus(response.status);
-      setTokenQuantity(response.data?.quantity);
-      setCost(response.data?.amount_total);
-      setCustomerEmail(response.data?.customer_email ?? "");
-    });
+    fetch(`/tokens/v1/session-status?session_id=${sessionId}`).then(
+      async (response) => {
+        const data: SessionStatusResponse = await response.json();
+        setStatus(data.status);
+        setTokenQuantity(data.quantity);
+        setCost(data.amount_total);
+        setCustomerEmail(data.customer_email ?? "");
+      }
+    );
   }, []);
 
   if (status === "open") {

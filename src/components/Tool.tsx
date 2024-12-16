@@ -1,17 +1,15 @@
 import { useState, useEffect } from "react";
 import { DropdownMenu } from "./DropdownMenu";
 import { MapComponent } from "./MapComponent";
-import LegendStyle from "./LegendStyle"; // Import the Legend
-
+import LegendStyle from "./LegendStyle";
 import "./Tool.css";
-import { apiRequest } from "../api";
-import { useAuth } from "../AuthContext";
 import GeoJSON from "ol/format/GeoJSON";
 import StreetViewComponent from "./StreetViewComponent";
 import { useJsApiLoader } from "@react-google-maps/api";
+import { useApi } from "../ApiContext";
 
 const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
-  const { logout } = useAuth();
+  const { fetch } = useApi();
 
   const [showStreetView, setShowStreetView] = useState(false);
   const [streetViewLocation, setStreetViewLocation] = useState<
@@ -93,20 +91,17 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     }
 
     try {
-      const response = await apiRequest<GeoJSON>(
-        `/geojson/v1/geojson/${label}_${dataset}`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+      const response = await fetch(`/geojson/v1/geojson/${label}_${dataset}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-        logout
-      );
+      });
 
-      if (response.status === "success" && response.data) {
-        setGeoJSON(response.data);
+      if (response.ok) {
+        const data: GeoJSON = await response.json();
+        setGeoJSON(data);
       } else {
-        console.error("Failed to fetch GeoJSON:", response.message);
+        console.error("Failed to fetch GeoJSON:", response.statusText);
         setGeoJSON(null);
         return;
       }
@@ -158,7 +153,10 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           <MapComponent
             coordinates={coordinates}
             dataset={geoJSON ?? undefined}
-            datasetName={datasetOptions.find((option) => option.value === dataset)?.label ?? "Default"} 
+            datasetName={
+              datasetOptions.find((option) => option.value === dataset)
+                ?.label ?? "Default"
+            }
             onStreetView={handleStreetView}
           />
         </>

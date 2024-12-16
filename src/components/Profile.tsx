@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
-import { useAuth } from "../AuthContext";
-import { apiRequest } from "../api";
+import { useApi } from "../ApiContext";
 
 type UserResponse = {
   username: string;
@@ -17,23 +16,20 @@ const Profile: React.FC = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-  const { logout } = useAuth();
+  const { fetch } = useApi();
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await apiRequest<UserResponse>(
-          "/users/v1/me",
-          { method: "GET" },
-          logout
-        );
+        const response = await fetch("/users/v1/me", { method: "GET" });
 
-        if (response.status === "success" && response.data) {
-          setUser(response.data);
-          setBio(response.data.bio || bio);
+        if (response.ok) {
+          const data: UserResponse = await response.json();
+          setUser(data);
+          setBio(data.bio || bio);
           setError(null);
         } else {
-          setError(response.message || "Failed to fetch user data.");
+          setError(response.statusText || "Failed to fetch user data.");
         }
       } catch (err) {
         console.error("Error fetching user data:", err);
@@ -44,26 +40,22 @@ const Profile: React.FC = () => {
     };
 
     fetchUser();
-  }, [logout]);
+  }, []);
 
   const handleSave = async () => {
     try {
       setLoading(true); // Show loading state while saving
-      const response = await apiRequest<UserResponse>(
-        "/users/v1/me",
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ bio }),
-        },
-        logout
-      );
+      const response = await fetch("/users/v1/me", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bio }),
+      });
 
-      if (response.status === "success") {
+      if (response.ok) {
         setUser((prev) => ({ ...prev!, bio })); // Update user bio locally
         setIsEditing(false); // Exit editing mode
       } else {
-        setError(response.message || "Failed to save bio.");
+        setError(response.statusText || "Failed to save bio.");
       }
     } catch (err) {
       console.error("Error saving bio:", err);

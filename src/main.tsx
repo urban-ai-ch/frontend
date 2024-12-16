@@ -6,11 +6,14 @@ import "@picocss/pico/css/pico.min.css";
 
 import "./index.css";
 import { AuthProvider } from "./AuthContext";
+import { ApiProvider } from "./ApiContext";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <AuthProvider>
-      <App />
+      <ApiProvider>
+        <App />
+      </ApiProvider>
     </AuthProvider>
   </React.StrictMode>
 );

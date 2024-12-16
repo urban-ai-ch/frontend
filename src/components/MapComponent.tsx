@@ -8,7 +8,6 @@ import { fromLonLat, transform } from "ol/proj";
 import GeoJSON from "ol/format/GeoJSON";
 import VectorLayer from "ol/layer/Vector";
 import VectorSource from "ol/source/Vector";
-// import { apiRequest } from "../api";
 import { createFeatureStyle } from "./MapStyles";
 
 export function MapComponent({
@@ -19,7 +18,7 @@ export function MapComponent({
 }: {
   coordinates: [number, number];
   dataset: GeoJSON | undefined;
-  datasetName: string | null; 
+  datasetName: string | null;
   onStreetView: (location: [number, number]) => void;
 }) {
   const mapRef = useRef<Map | null>(null);
@@ -110,7 +109,7 @@ export function MapComponent({
 
       mapRef.current.on("singleclick", (event) => {
         let featureFound = false;
-        
+
         const c = event.coordinate;
         const [lon, lat] = transform(c, "EPSG:3857", "EPSG:4326");
         if (lon && lat) setClickCoords([lat, lon]);
@@ -159,7 +158,8 @@ export function MapComponent({
         source: new VectorSource({
           features: features,
         }),
-        style: (feature) => datasetName ? createFeatureStyle(feature, datasetName) : undefined, // Apply external dynamic style
+        style: (feature) =>
+          datasetName ? createFeatureStyle(feature, datasetName) : undefined, // Apply external dynamic style
       });
 
       mapRef.current?.addLayer(datasetLayer);

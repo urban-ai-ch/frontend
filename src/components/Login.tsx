@@ -2,7 +2,7 @@ import "./Login.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import { apiRequest } from "../api";
+import { useApi } from "../ApiContext";
 
 type AuthTokenResponse = {
   token: string;
@@ -13,25 +13,23 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate(); // Used for navigation
-  const { login, logout } = useAuth();
+  const { login } = useAuth();
+  const { fetch } = useApi();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = await apiRequest<AuthTokenResponse>(
-      "/auth/v1/signin",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      },
-      logout
-    );
+    const response = await fetch("/auth/v1/signin", {
+      method: "POST",
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    });
 
-    if (response.status === "success" && response.data) {
-      login(response.data.token);
+    if (response.ok) {
+      const data: AuthTokenResponse = await response.json();
+      login(data.token);
       setError("");
       navigate("/");
     } else {

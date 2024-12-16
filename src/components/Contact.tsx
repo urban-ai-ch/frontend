@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Contact.css";
-import { apiRequest } from "../api";
-import { useAuth } from "../AuthContext";
+import { useApi } from "../ApiContext";
 
 type MailPayload = {
   subject: string;
@@ -16,7 +15,7 @@ export default function Contact() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
-  const { logout } = useAuth();
+  const { fetch } = useApi();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,19 +30,15 @@ export default function Contact() {
       subject: `Contact request - ${name} - ${email}`,
     };
     try {
-      const response = await apiRequest<never>(
-        "/mail/v1/broadcast",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
+      const response = await fetch("/mail/v1/broadcast", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        logout
-      );
+        body: JSON.stringify(payload),
+      });
 
-      if (response.status === "success") {
+      if (response.ok) {
         setSuccess(true);
         setError("");
         setName("");

@@ -4,11 +4,10 @@ import {
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 
-import { apiRequest } from "../../api";
-import { useAuth } from "../../AuthContext";
 import { useCallback } from "react";
 
-import "./Checkout.css"
+import "./Checkout.css";
+import { useApi } from "../../ApiContext";
 
 type OrderResponse = {
   clientSecret: string;
@@ -21,19 +20,18 @@ type OrderPayload = {
 const stripePromise = loadStripe(import.meta.env["VITE_STRIPE_PUBLIC_API"]);
 
 const CheckoutForm: React.FC = () => {
-  const { logout } = useAuth();
+  const { fetch } = useApi();
   const fetchClientSecret = useCallback(async () => {
     const payload: OrderPayload = {
       amount: 100,
     };
-    return apiRequest<OrderResponse>(
-      "/tokens/v1/create-checkout-session",
-      {
-        method: "POST",
-        body: JSON.stringify(payload),
-      },
-      logout
-    ).then((response) => response?.data?.clientSecret ?? "");
+    return fetch("/tokens/v1/create-checkout-session", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }).then(async (response) => {
+      const data: OrderResponse = await response.json();
+      return data.clientSecret ?? "";
+    });
   }, []);
 
   const options = { fetchClientSecret };

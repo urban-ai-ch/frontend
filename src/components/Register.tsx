@@ -1,10 +1,10 @@
 import "./Register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { apiRequest } from "../api";
-import { useAuth } from "../AuthContext";
+import { useApi } from "../ApiContext";
 
 export default function Register() {
+  const { fetch } = useApi();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -18,19 +18,15 @@ export default function Register() {
     if (password !== confirmPassword) {
       setError("Passwords do not match");
     } else {
-      const response = await apiRequest(
-        "/auth/v1/signup",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            username: username,
-            password: password,
-          }),
-        },
-        useAuth().logout
-      );
+      const response = await fetch("/auth/v1/signup", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      });
 
-      if (response.status === "success") {
+      if (response.ok) {
         setError("");
         navigate("/login");
       } else {

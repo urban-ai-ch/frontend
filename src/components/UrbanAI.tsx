@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./UrbanAI.css";
-import { apiRequest } from "../api";
-import { useAuth } from "../AuthContext";
+import { useApi } from "../ApiContext";
 
 type ImageObject = {
   name: string;
@@ -9,7 +8,7 @@ type ImageObject = {
 };
 
 export default function UrbanAI() {
-  const { logout } = useAuth();
+  const { fetch } = useApi();
   const [dragging, setDragging] = useState<boolean>(false);
   const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>([]);
@@ -41,21 +40,18 @@ export default function UrbanAI() {
     images.forEach((image) => formData.append("image", image)); // Append each image to the FormData object
 
     try {
-      const uploadResponse = await apiRequest<ImageObject[]>(
-        "/images/v1/images",
-        {
-          method: "POST",
-          body: formData,
-        },
-        logout
-      );
+      const response = await fetch("/images/v1/images", {
+        method: "POST",
+        body: formData,
+      });
 
-      if (uploadResponse.status === "success" && uploadResponse.data) {
+      if (response.ok) {
         alert("Images uploaded successfully!");
         setImages([]);
         setPreviewUrls([]);
 
-        const newImages: ImageObject[] = uploadResponse.data;
+        const data: ImageObject[] = await response.json();
+        const newImages: ImageObject[] = data;
         setUploadedImages((prevImages) => [...prevImages, ...newImages]); // Create a new array
       } else {
         alert("Failed to upload image.");

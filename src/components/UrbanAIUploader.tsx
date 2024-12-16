@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import "./UrbanAIUploader.css";
 import UrbanAIPreview from "./UrbanAIPreview";
-import { apiRequest } from "../api";
-import { useAuth } from "../AuthContext";
+import { useApi } from "../ApiContext";
 
 type ImageObject = {
   name: string;
@@ -12,18 +11,15 @@ type ImageObject = {
 export default function UrbanAIUploader() {
   const [uploadedImages, setUploadedImages] = useState<ImageObject[]>([]);
   const [, setLoading] = useState(false);
-  const { isAuthenticated, logout } = useAuth();
+  const { fetch } = useApi();
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const response = await apiRequest<ImageObject[]>(
-          "/images/v1/images",
-          {},
-          logout
-        );
-        if (response.status === "success" && response.data) {
-          setUploadedImages(response.data);
+        const response = await fetch("/images/v1/images");
+        if (response.ok) {
+          const data: ImageObject[] = await response.json();
+          setUploadedImages(data);
         } else {
           console.error("Failed to fetch images.");
         }
@@ -43,19 +39,16 @@ export default function UrbanAIUploader() {
       fileArray.forEach((image) => formData.append("image", image));
 
       try {
-        const uploadResponse = await apiRequest<ImageObject[]>(
-          "/images/v1/images",
-          {
-            method: "POST",
-            body: formData,
-          },
-          logout
-        );
+        const response = await fetch("/images/v1/images", {
+          method: "POST",
+          body: formData,
+        });
 
-        if (uploadResponse.status === "success" && uploadResponse.data) {
+        if (response.ok) {
           alert("Images uploaded successfully!");
 
-          const newImages: ImageObject[] = uploadResponse.data;
+          const data: ImageObject[] = await response.json();
+          const newImages: ImageObject[] = data;
           setUploadedImages((prevImages) => [...prevImages, ...newImages]); // Create a new array
         } else {
           alert("Failed to upload image.");
@@ -83,7 +76,6 @@ export default function UrbanAIUploader() {
         id="upload-button"
         type="file"
         accept="image/png, image/jpeg"
-        disabled = {!isAuthenticated}
         onChange={handleUpload}
       ></input>
       {uploadedImages.map((image) => (

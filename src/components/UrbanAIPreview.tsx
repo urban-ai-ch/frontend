@@ -11,7 +11,7 @@ export default function UrbanAIPreview({
 }: {
   uploadedImage: ImageObject;
 }) {
-  const [output, setOutput] = useState<string>("output here");
+  const [output] = useState<string>("output here");
 
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -29,7 +29,9 @@ export default function UrbanAIPreview({
           <option value="historical-value">Historical value</option>
           <option value="seismic-risk-potential">Seismic risk potential</option>
         </select>
-        <button type="submit" className="explore-button primary">Run AI</button>
+        <button type="submit" className="explore-button primary">
+          Run AI
+        </button>
       </form>
       <div className="ai-output">{output}</div>
     </div>

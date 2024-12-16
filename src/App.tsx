@@ -32,32 +32,38 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route
             path="/input"
-            element={isAuthenticated ? <Input /> : <Login></Login>}
+            element={isAuthenticated ? <Input /> : <Login />}
           />
           <Route
             path="/profile"
-            element={isAuthenticated ? <Profile /> : <Login></Login>}
+            element={isAuthenticated ? <Profile /> : <Login />}
           />
           <Route
             path="/urban-ai"
-            element={isAuthenticated ? <UrbanAIUploader /> : <Login></Login>}
+            element={isAuthenticated ? <UrbanAIUploader /> : <Login />}
           />
           <Route path="/legal" element={<Legal />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route
             path="/checkout"
-            element={isAuthenticated ? <CheckoutForm /> : <Login></Login>}
+            element={isAuthenticated ? <CheckoutForm /> : <Login />}
           />
           <Route
             path="/return"
-            element={isAuthenticated ? <Return /> : <Login></Login>}
+            element={isAuthenticated ? <Return /> : <Login />}
           />
           <Route
             path="/tool"
-            element={isAuthenticated ? <ToolPage /> : <Login></Login>}
+            element={isAuthenticated ? <ToolPage /> : <Login />}
           />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/register"
+            element={isAuthenticated ? <HomePage /> : <Register />}
+          />
+          <Route
+            path="/login"
+            element={isAuthenticated ? <HomePage /> : <Login />}
+          />
         </Routes>
       </Layout>
     </Router>

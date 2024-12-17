@@ -33,7 +33,7 @@ const Return: React.FC = () => {
     const urlParams = new URLSearchParams(queryString);
     const sessionId = urlParams.get("session_id");
 
-    fetch(`/tokens/v1/session-status?session_id=${sessionId}`).then(
+    fetch(`/payments/v1/session-status?session_id=${sessionId}`).then(
       async (response) => {
         const data: SessionStatusResponse = await response.json();
         setStatus(data.status);

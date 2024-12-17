@@ -51,7 +51,7 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchTokens = async () => {
       try {
-        const response = await fetch("/tokens/v1/self", { method: "GET" });
+        const response = await fetch("/tokens/v1/self");
         if (response.ok) {
           const data: TokenResponse = await response.json();
           const tokenCount = data.tokenCount;

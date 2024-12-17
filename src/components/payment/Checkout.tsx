@@ -25,7 +25,7 @@ const CheckoutForm: React.FC = () => {
     const payload: OrderPayload = {
       amount: 100,
     };
-    return fetch("/tokens/v1/create-checkout-session", {
+    return fetch("/payments/v1/create-checkout-session", {
       method: "POST",
       body: JSON.stringify(payload),
     }).then(async (response) => {

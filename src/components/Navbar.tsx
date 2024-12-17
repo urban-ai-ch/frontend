@@ -54,7 +54,7 @@ export function Navbar() {
 
       <div className="navbar-center">
         <ul className={`nav-links ${isMenuOpen ? "active" : ""}`}>
-        <li>
+          <li>
             <Link to="/tool" onClick={closeMenu}>
               Map
             </Link>
@@ -66,10 +66,14 @@ export function Navbar() {
           </li>
           <li>
             <Link to="/checkout" onClick={closeMenu}>
-              Tokens
+              Purchase
             </Link>
           </li>
-          <li><Link to="/pricing" onClick={closeMenu}>Pricing</Link></li>
+          {/*<li>
+            <Link to="/pricing" onClick={closeMenu}>
+              Pricing
+            </Link>
+          </li>*/}
           <li className="navbar-tool-button">
             <Link
               to={auth.isAuthenticated ? "/tool" : "/login"}

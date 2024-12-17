@@ -84,22 +84,22 @@ export default function UrbanAIPreview({
 
   return (
     <div className="upload-preview">
-      <img src={uploadedImage.href} className="preview-uploaded-image" />
-      <form onSubmit={handleFormSubmit} className="image-row">
-        <select
-          name="ai-input"
-          id="ai-input"
-          className="ai-input"
-          ref={criteriaRef}
-        >
-          <option value="materials">Materials</option>
-          <option value="history">Historical value</option>
-          <option value="seismic">Seismic risk potential</option>
-        </select>
-        <button type="submit" className="explore-button primary">
-          Run AI
-        </button>
-      </form>
+        <img src={uploadedImage.href} className="preview-uploaded-image" />
+        <form onSubmit={handleFormSubmit} className="image-row-form">
+          <select
+            name="ai-input"
+            id="ai-input"
+            className="ai-input"
+            ref={criteriaRef}
+          >
+            <option value="materials">Materials</option>
+            <option value="history">Historical value</option>
+            <option value="seismic">Seismic risk potential</option>
+          </select>
+          <button type="submit" className="explore-button primary" id="run-ai">
+            Run AI
+          </button>
+        </form>
       <div className="ai-output">{output}</div>
     </div>
   );

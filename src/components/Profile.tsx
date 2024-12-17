@@ -8,11 +8,17 @@ type UserResponse = {
   bio?: string;
 };
 
+type TokenResponse = {
+  tokenCount: number;
+};
+
 const Profile: React.FC = () => {
   const [user, setUser] = useState<UserResponse | null>(null);
   const [bio, setBio] = useState<string>(
     "Software developer passionate about creating amazing user experiences."
   );
+  const [tokens, setTokens] = useState<number>(0);
+
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +46,27 @@ const Profile: React.FC = () => {
     };
 
     fetchUser();
+  }, []);
+
+  useEffect(() => {
+    const fetchTokens = async () => {
+      try {
+        const response = await fetch("/tokens/v1/self", { method: "GET" });
+        if (response.ok) {
+          const data: TokenResponse = await response.json();
+          const tokenCount = data.tokenCount;
+          setTokens(tokenCount);
+          console.log(`Tokens retrieved! ${tokenCount}`);
+        } else {
+          setError(response.statusText || "Failed to fetch tokens.");
+        }
+      } catch (err) {
+        console.error("Error fetching user tokens:", err);
+        setError("An unexpected error occurred.");
+      }
+    };
+
+    fetchTokens();
   }, []);
 
   const handleSave = async () => {
@@ -101,6 +128,7 @@ const Profile: React.FC = () => {
           ) : (
             <p className="profile-bio">{bio}</p>
           )}
+          <h4>Tokens: {tokens}</h4>
           <hr style={{ border: "1px solid #ccc", margin: "20px 0" }} />
         </div>
         <div className="profile-footer">

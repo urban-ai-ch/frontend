@@ -48,7 +48,7 @@ const Return: React.FC = () => {
     return <Navigate to="/checkout" />;
   }
 
-  if (status === "success") {
+  if (status === "complete") {
     return (
       <section id="success" className="transaction-status-message">
         <h1>Thank you for your purchase.</h1>

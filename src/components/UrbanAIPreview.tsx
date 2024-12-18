@@ -73,7 +73,7 @@ export default function UrbanAIPreview({
       if (response.ok) {
         setOutput(
           <p>
-            <strong>Analysis Complete:</strong> See results above
+            <strong>Analysis running...</strong> It will be ready in a few minutes. Please reload the page to obtain the results!
           </p>
         );
       } else {

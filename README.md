@@ -137,7 +137,7 @@ We deployed a variety of Cloudflare Features ranging from DDOS-Protection, bot d
 Tags:
 
 - Milestone 2: [Milestone 2 tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v0.1)
-- Final Submission: [Final submission tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v1.0)
+- Final Submission: [Final submission tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/final_submission)
 
 
 ## Contribution
@@ -149,5 +149,7 @@ Noah Gerber: Deployment, AI deployment, authentication, payment and legal page
 Eren Homburg: CSS styling, button styling, profile page, about us page
 
 Saimaneesh Yeturu: Map implementation, AI pipeline implementation, navigation bar, urban-ai image portal (upload portal)
+
+In general, the project workload was fairly distributed between members, with overlapping work. 
 
 

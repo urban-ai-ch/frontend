@@ -112,4 +112,5 @@ We deployed a variety of Cloudflare Features ranging from DDOS-Protection, bot d
 Tags:
 
 - Milestone 2: [Milestone 2 tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v0.1)
+- Final Submission: [Final submission tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v1.0)
 

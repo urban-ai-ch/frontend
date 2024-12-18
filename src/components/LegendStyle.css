@@ -68,7 +68,8 @@
 @media (max-width: 1200px) {
   .toggle-legend-button {
     width: 200px;
-    padding: 5px;
+    padding: 10px;
+		font-size: 1rem;
   }
 
   .legend-container{
@@ -78,7 +79,7 @@
   }
 
   .legend-item { 
-    font-size: 0.9em;
+    font-size: 0.9rem;
     gap: 0px;
   }
 
@@ -96,7 +97,7 @@
 
   .toggle-legend-button {
     width: 200px;
-    padding: 5px;
+    padding: 10px;
 		font-size: 1rem;
   }
 

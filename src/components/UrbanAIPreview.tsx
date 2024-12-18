@@ -38,9 +38,7 @@ export default function UrbanAIPreview({
         metaData.history ? <p>
           Historical data: {metaData.history ?? ""}
         </p> : <></>
-        metadata.seismic ?{" "}
-        <p>Seismic risk potential: {metaData.seismic ?? ""}</p>
-        <></>
+        metadata.seismic ? <p>Seismic risk potential: {metaData.seismic ?? ""}</p> : <></>
       </>
     );
   };

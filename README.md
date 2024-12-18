@@ -63,7 +63,7 @@ You may use the username 'test' and password 'test'. Please do not share these c
   - [x] About page
   - [x] Functional contact page
 
-- [ ] Processing of uploaded images, Google Maps StreetView API, accessibility, responsiveness (Milestone 3)
+- [x] Processing of uploaded images, Google Maps StreetView API, accessibility, responsiveness (Milestone 3)
   - [x] Improve responsiveness
   - [x] Make dataset points clickable to display properties
   - [x] Google StreetView API to view relevant (to data point) street view panoramas

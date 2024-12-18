@@ -41,7 +41,7 @@ export default function UrbanAIPreview({
           <p>Historical data: {typeof metaData.history}</p>
         )}
         {metaData.seismic !== 'undefined' && (
-          <p>Seismic risk potential: {metaData.seismic ?? ""}</p>
+          <p>Seismic risk potential: {metaData.seismic}</p>
         )}
       </>
     );

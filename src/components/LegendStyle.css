@@ -3,7 +3,7 @@
   flex-direction: row;
   gap: 10px; 
   /* padding-left: 20px; */
-  align-items: flex-start;
+  align-items: center;
   /* border: 1px solid #ccc; */
   /* border-radius: 5px; */
   /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); */
@@ -60,7 +60,7 @@
 .legend-color {
   flex-shrink: 0; /* Prevent the circle from shrinking */
   width: 1rem; /* Adjust size if necessary */
-  height: 01rem; /* Keep the circle size consistent */
+  height: 1rem; /* Keep the circle size consistent */
   border-radius: 50%;
   border: 1px solid #000;
 }
@@ -74,6 +74,7 @@
   .legend-container{
     flex-direction: column;
     width: 100%;
+		margin-bottom: 10px;
   }
 
   .legend-item { 
@@ -90,11 +91,13 @@
 @media (max-width: 768px) {
   .legend-container{
     flex-direction: column;
+		margin-bottom: 10px;
   }
 
   .toggle-legend-button {
-    width: 100px;
+    width: 200px;
     padding: 5px;
+		font-size: 1rem;
   }
 
   .legend-color {

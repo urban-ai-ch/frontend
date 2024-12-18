@@ -55,10 +55,39 @@
     z-index: 1000; /* Ensure the button is above the map */
   }
 
+	.toggle-coloring-button {
+		/* padding: 8px 12px; */
+		width: 180px;
+		padding: 10px;
+		background-color: var(--accent-color);
+		color: black;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 0.9rem; 
+		transition: background-color 0.3s ease;
+	}
+	
+	.toggle-coloring-button:hover {
+		background-color: white;
+	}
+	
+
   @media (max-width: 1200px) {
     .filter-menu {
         flex-direction: column;
         justify-content: 100%;
         align-items: center;
     }
+		.toggle-coloring-button {
+			width: 200px;
+			font-size: 1rem;
+		}
   }
+
+@media (max-width: 768px) {
+	.toggle-coloring-button {
+		width: 200px;
+		font-size: 1rem;
+	}
+}

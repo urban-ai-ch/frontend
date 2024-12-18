@@ -14,11 +14,13 @@ export function MapComponent({
   coordinates,
   dataset,
   datasetName,
+	useDefaultColor,
   onStreetView,
 }: {
   coordinates: [number, number];
   dataset: GeoJSON | undefined;
   datasetName: string | null;
+	useDefaultColor: boolean;
   onStreetView: (location: [number, number]) => void;
 }) {
   const mapRef = useRef<Map | null>(null);
@@ -159,7 +161,7 @@ export function MapComponent({
           features: features,
         }),
         style: (feature) =>
-          datasetName ? createFeatureStyle(feature, datasetName) : undefined, // Apply external dynamic style
+          datasetName ? createFeatureStyle(feature, datasetName, useDefaultColor) : undefined, // Apply external dynamic style
       });
 
       mapRef.current?.addLayer(datasetLayer);
@@ -170,7 +172,7 @@ export function MapComponent({
       };
     }
     return () => {};
-  }, [dataset, datasetName]);
+  }, [dataset, datasetName, useDefaultColor]);
 
   return (
     <div>

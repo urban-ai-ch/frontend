@@ -34,13 +34,18 @@ export default function UrbanAIPreview({
 
     setOutput(
       <>
-        {metaData.materials && <p>Materials used: {metaData.materials}</p>}
-        {metaData.history && <p>Historical data: {metaData.history ?? ""}</p>}
-        {metaData.seismic && (
+        {metaData.materials !== 'undefined' && (
+          <p>Materials used: {metaData.materials}</p>
+        )}
+        {metaData.history !== 'undefined' && (
+          <p>Historical data: {typeof metaData.history}</p>
+        )}
+        {metaData.seismic !== 'undefined' && (
           <p>Seismic risk potential: {metaData.seismic ?? ""}</p>
         )}
       </>
     );
+    
   };
 
   useEffect(() => {

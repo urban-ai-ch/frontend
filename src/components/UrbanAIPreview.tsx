@@ -38,7 +38,7 @@ export default function UrbanAIPreview({
           <p>Materials used: {metaData.materials}</p>
         )}
         {metaData.history !== 'undefined' && (
-          <p>Historical data: {typeof metaData.history}</p>
+          <p>Historical data: {metaData.history}</p>
         )}
         {metaData.seismic !== 'undefined' && (
           <p>Seismic risk potential: {metaData.seismic}</p>

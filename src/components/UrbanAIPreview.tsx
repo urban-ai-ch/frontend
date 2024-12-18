@@ -34,9 +34,13 @@ export default function UrbanAIPreview({
 
     setOutput(
       <>
-        <p>Materials used: {metaData.materials}</p>
-        <p>Historical data: {metaData.history ?? ''}</p>
-        <p>Seismic risk potential: {metaData.seismic ?? ''}</p>
+        metaData.materials ? <p>Materials used: {metaData.materials}</p> : <></>
+        metaData.history ? <p>
+          Historical data: {metaData.history ?? ""}
+        </p> : <></>
+        metadata.seismic ?{" "}
+        <p>Seismic risk potential: {metaData.seismic ?? ""}</p>
+        <></>
       </>
     );
   };
@@ -73,7 +77,8 @@ export default function UrbanAIPreview({
       if (response.ok) {
         setOutput(
           <p>
-            <strong>Analysis running...</strong> It will be ready in a few minutes. Please reload the page to obtain the results!
+            <strong>Analysis running...</strong> It will be ready in a few
+            minutes. Please reload the page to obtain the results!
           </p>
         );
       } else {

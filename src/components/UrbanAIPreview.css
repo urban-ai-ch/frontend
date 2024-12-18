@@ -13,6 +13,7 @@
 .button-in-center {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .preview-uploaded-image {
@@ -22,12 +23,12 @@
 }
 
 .image-row-form {
-  display: flex; /* Use Flexbox for layout */
+  display: flex;
   flex-direction: column;
-  align-items: center; /* Vertically align items */
+  align-items: center;
   justify-content: center;
   height: 100%;
-  gap: 10px; /* Add spacing between elements */
+  gap: 10px;
 }
 
 .ai-output {
@@ -39,28 +40,64 @@
   overflow-y: scroll;
 }
 
+.delete-button {
+  padding: 10px 20px; /* Match the size of the Run AI button */
+  font-size: 1rem; /* Same font size as Run AI */
+  height: 100%;
+  border: solid 1px var(--accent-color);
+  border-radius: 5px;
+  background-color: #ff4d4d; /* Default red color */
+  color: white;
+  cursor: pointer;
+  text-align: center;
+}
+
+.delete-button:hover {
+  background-color: #ff1a1a;
+}
+
 @media (max-width: 1000px) {
   .upload-preview {
     display: grid;
-    height: 50vh;
+    height: 40vh;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 400px auto;
   }
 
   .preview-uploaded-image {
     grid-row: 1;
-    grid-column-start: 1;
+    grid-column: 1;
     width: 100%;
-  }
-
-  .image-row-form {
-    grid-row: 1;
-    grid-column: 2;
+    height: 100%;
   }
 
   .ai-output {
-    grid-row: 2;
-    grid-column: 1 / -1;
+    grid-row: 1;
+    grid-column: 2;
     width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid var(--accent-color);
+    box-sizing: border-box;
+  }
+
+  .button-in-center {
+    grid-row: 2; /* Bottom row */
+    grid-column: 1 / -1; /* Span across both columns */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    overflow: hidden;
+  }
+
+  .delete-button {
+    margin-bottom: 18px;
+  }
+
+  .image-row-form {
+    flex-direction: row;
   }
 }

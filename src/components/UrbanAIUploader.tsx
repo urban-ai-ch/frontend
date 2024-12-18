@@ -10,7 +10,8 @@ type ImageObject = {
 
 export default function UrbanAIUploader() {
   const [uploadedImages, setUploadedImages] = useState<ImageObject[]>([]);
-  const [, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
   const { fetch } = useApi();
 
   useEffect(() => {
@@ -29,11 +30,15 @@ export default function UrbanAIUploader() {
     };
 
     fetchImages();
-  }, []);
+  }, [fetch]);
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
+
     if (files) {
+      setLoading(true);
+      setStatusMessage("Uploading...");
+
       const fileArray = Array.from(files);
       const formData = new FormData();
       fileArray.forEach((image) => formData.append("image", image));
@@ -45,21 +50,29 @@ export default function UrbanAIUploader() {
         });
 
         if (response.ok) {
-          alert("Images uploaded successfully!");
-
+          setStatusMessage("Complete");
           const data: ImageObject[] = await response.json();
-          const newImages: ImageObject[] = data;
-          setUploadedImages((prevImages) => [...prevImages, ...newImages]); // Create a new array
+          setUploadedImages((prevImages) => [...prevImages, ...data]);
         } else {
-          alert("Failed to upload image.");
+          setStatusMessage("Failed to upload");
+          console.error("Failed to upload images.");
         }
       } catch (error) {
+        setStatusMessage("Error during upload");
         console.error("Upload error:", error);
-        alert("An error occurred while uploading images.");
       } finally {
+        setTimeout(() => {
+          setStatusMessage("");
+        }, 3000);
         setLoading(false);
       }
     }
+  };
+
+  const deleteImage = (imageName: string) => {
+    setUploadedImages((prevImages) =>
+      prevImages.filter((image) => image.name !== imageName)
+    );
   };
 
   return (
@@ -78,9 +91,17 @@ export default function UrbanAIUploader() {
         multiple
         accept="image/png, image/jpeg"
         onChange={handleUpload}
+        disabled={loading}
       ></input>
+      <div className="spacer">
+        <p className="status-message">{statusMessage}</p>
+      </div>
       {uploadedImages.map((image) => (
-        <UrbanAIPreview uploadedImage={image}></UrbanAIPreview>
+        <UrbanAIPreview
+          key={image.name}
+          uploadedImage={image}
+          onDelete={deleteImage}
+        />
       ))}
     </div>
   );

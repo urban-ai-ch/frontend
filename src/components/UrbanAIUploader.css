@@ -21,3 +21,14 @@
   display: flex;
   gap: 0.5rem;
 }
+
+.spacer {
+  padding: 100px;
+}
+
+.status-message {
+  font-size: 2em;
+  color: #555;
+  font-weight: bold;
+  text-align: center;
+}

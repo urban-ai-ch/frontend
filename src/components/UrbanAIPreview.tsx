@@ -19,12 +19,15 @@ type ImageMetaData = {
 
 export default function UrbanAIPreview({
   uploadedImage,
+  onDelete,
 }: {
   uploadedImage: ImageObject;
+  onDelete: (imageName: string) => void;
 }) {
   const { fetch } = useApi();
   const [output, setOutput] = useState<JSX.Element>(<></>);
   const criteriaRef = useRef<HTMLSelectElement>(null);
+
   const fetchImageMeta = async () => {
     const response = await fetch(`/images/v1/metadata/${uploadedImage.name}`);
     const metaData: ImageMetaData = await response.json();
@@ -48,11 +51,9 @@ export default function UrbanAIPreview({
     const selectedCriteria = criteriaRef.current?.value as Criteria;
     if (!selectedCriteria) {
       setOutput(
-        <>
-          <p>
-            <strong>ERROR: </strong> Invalid analysis criteria
-          </p>
-        </>
+        <p>
+          <strong>ERROR: </strong> Invalid analysis criteria
+        </p>
       );
       return;
     }
@@ -70,7 +71,17 @@ export default function UrbanAIPreview({
       });
 
       if (response.ok) {
+        setOutput(
+          <p>
+            <strong>Analysis Complete:</strong> See results above
+          </p>
+        );
       } else {
+        setOutput(
+          <p>
+            <strong>ERROR: </strong> Analysis failed
+          </p>
+        );
         await fetchImageMeta();
       }
     } catch (error) {
@@ -84,7 +95,8 @@ export default function UrbanAIPreview({
 
   return (
     <div className="upload-preview">
-        <img src={uploadedImage.href} className="preview-uploaded-image" />
+      <img src={uploadedImage.href} className="preview-uploaded-image" />
+      <div className="button-in-center">
         <form onSubmit={handleFormSubmit} className="image-row-form">
           <select
             name="ai-input"
@@ -100,6 +112,13 @@ export default function UrbanAIPreview({
             Run AI
           </button>
         </form>
+        <button
+          className="delete-button danger"
+          onClick={() => onDelete(uploadedImage.name)}
+        >
+          Delete
+        </button>
+      </div>
       <div className="ai-output">{output}</div>
     </div>
   );

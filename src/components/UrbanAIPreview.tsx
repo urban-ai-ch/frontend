@@ -35,8 +35,8 @@ export default function UrbanAIPreview({
     setOutput(
       <>
         <p>Materials used: {metaData.materials}</p>
-        <p>History data: {metaData.history}</p>
-        <p>Seismic risk rating: {metaData.seismic}</p>
+        <p>Historical data: {metaData.history ?? ''}</p>
+        <p>Seismic risk potential: {metaData.seismic ?? ''}</p>
       </>
     );
   };

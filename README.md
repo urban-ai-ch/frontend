@@ -74,9 +74,34 @@ You may use the username 'test' and password 'test'. Please do not share these c
   - [x] Make all pages responsive and usable on mobile devices
   - [x] Profile page
   - [x] Token purchasing system
+  - [x] Legal page
+  - [x] Coloring of the map dataset
 
-## Weekly Summary
+## Summary
 For a clearer overview of our achievements, we present our summary as a list of implemented features.
+
+### Frontend
+
+#### Interactive map
+We implemented an interactive map with OpenLayers, with coloring of datasets.
+
+#### Image portal
+We provide a simple portal to upload images to the AI for insight generation.
+
+#### Home page
+We create a minimalistic home page linking to the interactive map (and to individual cities on the map), as we prioritize fast loading times on the application.
+
+#### Contact page
+We provide a simple form with a functional email to allow for users to directly contact us.
+
+#### About page
+We provide a simple page describing us 4 developers.
+
+#### Legal page and pricing page
+A simple page with legal information is provided. This allows for the pricing page to be functional with Stripe.
+
+#### Profile page
+A profile page has been implemented, where users can edit their bios and check the number of owned tokens.
 
 ### Backend
 
@@ -112,5 +137,19 @@ We deployed a variety of Cloudflare Features ranging from DDOS-Protection, bot d
 Tags:
 
 - Milestone 2: [Milestone 2 tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v0.1)
-- Final Submission: [Final submission tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/v1.0)
+- Final Submission: [Final submission tag](https://gitlab.ethz.ch/webdev-hs24-urbanai/frontend/-/tags/final_submission)
+
+
+## Contribution
+
+Patrick Eugster: Home page, Coloring of datasets, general styling of buttons, responsiveness
+
+Noah Gerber: Deployment, AI deployment, authentication, payment and legal page
+
+Eren Homburg: CSS styling, button styling, profile page, about us page
+
+Saimaneesh Yeturu: Map implementation, AI pipeline implementation, navigation bar, urban-ai image portal (upload portal)
+
+In general, the project workload was fairly distributed between members, with overlapping work. 
+
 

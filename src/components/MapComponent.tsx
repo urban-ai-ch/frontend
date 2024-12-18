@@ -31,36 +31,37 @@ export function MapComponent({
   const [popOverlay, setPopOverlay] = useState<Overlay | null>(null);
   const [clickCoords, setClickCoords] = useState<[number, number] | null>(null);
 
-  const DISPLAY_PROPERTIES = [
-    "architectu",
-    "heritage_s",
-    "material",
-    "building_c",
-    "main_facad",
-    "roof",
-    "energy_fea",
-    "energy_ass",
-    "gutters",
-    "building_t",
-    "pre_domain",
-    "ART",
-    "ARTZH",
-    "BEARBEITUN",
-    "BFSNR",
-    "EGID",
-    "GBAUJ",
-    "GBAUP",
-    "GVZNUMMER",
-    "QUALITAET",
-    "STICHTAG",
-    "build_year",
-    "floors",
-    "height",
-    "latitude",
-    "longitude",
-    "area_in_me",
-    "SHAPE_Area",
-  ];
+  const DISPLAY_PROPERTIES: Record<string, string> = {
+    "architectu": "Architecture",
+    "heritage_s": "Heritage Status",
+    "material": "Material",
+    "building_c": "Building Condition",
+    "main_facad": "Main Facade",
+    "roof": "Roof Type",
+    "energy_fea": "Energy Features",
+    "energy_ass": "Energy Assessment",
+    "gutters": "Gutters",
+    "building_t": "Building Type",
+    "pre_domain": "Previous Domain",
+    "ART": "Art Category",
+    "ARTZH": "Art Subcategory",
+    "BEARBEITUN": "Processing Information",
+    "BFSNR": "Federal Statistical Number",
+    "EGID": "Building ID",
+    "GBAUJ": "Construction Year",
+    "GBAUP": "Construction Period",
+    "GVZNUMMER": "Property Number",
+    "QUALITAET": "Data Quality",
+    "STICHTAG": "Effective Date",
+    "build_year": "Build Year",
+    "floors": "Number of Floors",
+    "height": "Building Height",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "area_in_me": "Area in Square Meters",
+    "SHAPE_Area": "Shape Area"
+  }
+  
 
   const hidePopup = () => {
     popOverlay?.setPosition(undefined);
@@ -122,17 +123,18 @@ export function MapComponent({
 
           if (properties) {
             const filteredProperties = Object.entries(properties)
-              .filter(([key]) => DISPLAY_PROPERTIES.includes(key))
+              .filter(([key]) => key in DISPLAY_PROPERTIES) // Check if the key exists in the json object
               .map(([key, value], index) => (
                 <div key={index} className="popup-row">
-                  <strong>{key.replace(/_/g, " ").toUpperCase()}:</strong>{" "}
-                  {value}
+                  <strong>{DISPLAY_PROPERTIES[key as keyof typeof DISPLAY_PROPERTIES]}:</strong> {value}
                 </div>
               ));
-
+          
             setPopupText(filteredProperties);
           }
           popupOverlay.setPosition(event.coordinate);
+          
+          
         });
 
         if (!featureFound) {

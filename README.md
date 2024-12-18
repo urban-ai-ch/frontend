@@ -28,8 +28,6 @@ The target users are people interesting in gaining architectural and civil engin
 
 ---
 
-## Requirements
-
 ## How to Run
 
 First clone the repository.
@@ -48,11 +46,11 @@ To run the frontend
 
 You will be prompted to login. The register page is locked for now as we do not wish to make the data public (due to the unpublished nature of the paper).
 
-You may f the username 'test' and password 'test'. Please do not share these credentials.
+You may use the username 'test' and password 'test'. Please do not share these credentials.
 
 ## Milestones
 
-- [ ] Page skeleton, implementation of core functionalities (Milestone 2)
+- [x] Page skeleton, implementation of core functionalities (Milestone 2)
 
   - [x] Responsive navigation bar
   - [x] Create filter components (dropdown menu)
@@ -62,17 +60,20 @@ You may f the username 'test' and password 'test'. Please do not share these cre
   - [x] First test of interactive, clickable map with data
   - [x] Backend fetching of correct geojson file
   - [x] Home page
-  - [ ] About page
+  - [x] About page
   - [x] Functional contact page
 
 - [ ] Processing of uploaded images, Google Maps StreetView API, accessibility, responsiveness (Milestone 3)
-  - [ ] Improve responsiveness
-  - [ ] Make dataset points clickable to display properties
-  - [ ] Improve map performance with large datasets
-  - [ ] Google Dynamic StreetView API for easy image uploads
-  - [ ] Add animations and updated design to homepage
-  - [ ] More consisent design layout, maybe light & dark mode
-  - [ ] Respect some accessibilities
+  - [x] Improve responsiveness
+  - [x] Make dataset points clickable to display properties
+  - [x] Google StreetView API to view relevant (to data point) street view panoramas
+  - [x] More consistent design layout
+  - [x] Host Grounding-SAM on Replicate
+  - [x] Host an LLM on Cloudflare
+  - [x] Create an image portal for direct uploads to the AI
+  - [x] Make all pages responsive and usable on mobile devices
+  - [x] Profile page
+  - [x] Token purchasing system
 
 ## Weekly Summary
 For a clearer overview of our achievements, we present our summary as a list of implemented features.

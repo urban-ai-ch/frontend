@@ -111,6 +111,11 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
     }
   };
 
+	const [useDefaultColor, setUseDefaultColor] = useState(false); // State to toggle colors
+	const toggleColoring = () => {
+    setUseDefaultColor((prev) => !prev);
+  };
+
   // UseEffect to fetch GeoJSON whenever coordinates or dataset change
   useEffect(() => {
     if (coordinates && dataset) {
@@ -135,6 +140,9 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
           onChange={(newDataset: string) => setDataset(newDataset)}
           enabled={showStreetView}
         />
+				<button className="toggle-coloring-button" onClick={toggleColoring}>
+          {useDefaultColor ? "Enable Specific Material Coloring" : "Disable Specific Material Coloring"}
+        </button>
         {/* <InputButton label="Input" to="/Input" variant="primary" /> */}
         <LegendStyle /> {/* Add the LegendStyle component here */}
       </div>
@@ -157,6 +165,7 @@ const Tool = ({ defaultLocation }: { defaultLocation: string }) => {
               datasetOptions.find((option) => option.value === dataset)
                 ?.label ?? "Default"
             }
+						useDefaultColor={useDefaultColor}
             onStreetView={handleStreetView}
           />
         </>

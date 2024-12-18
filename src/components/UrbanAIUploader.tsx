@@ -69,10 +69,30 @@ export default function UrbanAIUploader() {
     }
   };
 
-  const deleteImage = (imageName: string) => {
-    setUploadedImages((prevImages) =>
-      prevImages.filter((image) => image.name !== imageName)
-    );
+  const deleteImage = async (imageName: string) => {
+    try {
+      const response = await fetch(`/images/v1/image/${imageName}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        setStatusMessage("Deleted");
+        setUploadedImages((prevImages) =>
+          prevImages.filter((image) => image.name !== imageName)
+        );
+      } else {
+        setStatusMessage("Failed to delete");
+        console.error("Failed to delete image.");
+      }
+    } catch (error) {
+      setStatusMessage("Error during deletion");
+      console.error("Delete error:", error);
+    } finally {
+      setTimeout(() => {
+        setStatusMessage("");
+      }, 3000);
+      setLoading(false);
+    }
   };
 
   return (

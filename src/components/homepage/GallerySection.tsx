@@ -12,37 +12,37 @@ const GallerySection = () => {
   const images = [
     {
       src: imgZurich,
-      alt: "Gallery 1",
+      alt: "image of zurich",
       parameter: "Zurich",
       label: "Explore Zurich",
     },
     {
       src: imgMelbourne,
-      alt: "Gallery 2",
+      alt: "image of melbourne",
       parameter: "Melbourne",
       label: "Explore Melbourne",
     },
     {
       src: imgMumbai,
-      alt: "Gallery 3",
+      alt: "image of mumbai",
       parameter: "Mumbai",
       label: "Explore Mumbai",
     },
     {
       src: imgCapeTown,
-      alt: "Gallery 4",
+      alt: "image of cape town",
       parameter: "Cape Town",
       label: "Explore Cape Town",
     },
     {
       src: imgSanFrancisco,
-      alt: "Gallery 5",
+      alt: "image of san francisco",
       parameter: "San Francisco",
       label: "Explore San Francisco",
     },
     {
       src: imgRio,
-      alt: "Gallery 6",
+      alt: "image of rio",
       parameter: "Rio",
       label: "Explore Rio",
     },
